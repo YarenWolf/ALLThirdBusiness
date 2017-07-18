@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>name</key>
+		<string>冰雪奇缘</string>
+		<key>filename</key>
+		<string>001.mp3</string>
+		<key>singer</key>
+		<string>Rascal Flatts</string>
+		<key>singerIcon</key>
+		<string>001.png</string>
+		<key>icon</key>
+		<string>001.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>森林王子</string>
+		<key>filename</key>
+		<string>002.mp3</string>
+		<key>singer</key>
+		<string>Fall Out Boy</string>
+		<key>singerIcon</key>
+		<string>002.png</string>
+		<key>icon</key>
+		<string>002.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>狮子王</string>
+		<key>filename</key>
+		<string>003.mp3</string>
+		<key>singer</key>
+		<string>Jason Derülo</string>
+		<key>singerIcon</key>
+		<string>003.png</string>
+		<key>icon</key>
+		<string>003.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>All Of Me</string>
+		<key>filename</key>
+		<string>004.mp3</string>
+		<key>singer</key>
+		<string>John Legend</string>
+		<key>singerIcon</key>
+		<string>004.png</string>
+		<key>icon</key>
+		<string>004.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>大力神</string>
+		<key>filename</key>
+		<string>005.mp3</string>
+		<key>singer</key>
+		<string>Ariana Grande</string>
+		<key>singerIcon</key>
+		<string>005.png</string>
+		<key>icon</key>
+		<string>005.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Innocence</string>
+		<key>filename</key>
+		<string>006.mp3</string>
+		<key>singer</key>
+		<string>Avril Lavigne</string>
+		<key>singerIcon</key>
+		<string>006.png</string>
+		<key>icon</key>
+		<string>006.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>Price Tag</string>
+		<key>filename</key>
+		<string>007.mp3</string>
+		<key>singer</key>
+		<string>Jessie J</string>
+		<key>singerIcon</key>
+		<string>007.png</string>
+		<key>icon</key>
+		<string>007.png</string>
+	</dict>
+	<dict>
+		<key>name</key>
+		<string>I Know What You Did Last Summer</string>
+		<key>filename</key>
+		<string>008.mp3</string>
+		<key>singer</key>
+		<string>Shawn Mendes</string>
+		<key>singerIcon</key>
+		<string>008.png</string>
+		<key>icon</key>
+		<string>008.png</string>
+	</dict>
+</array>
+</plist>

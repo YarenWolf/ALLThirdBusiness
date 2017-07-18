@@ -1,0 +1,992 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>DataPersistenceViewController</key>
+	<string>这是数据持久化模型。包含文件处理和数据操作，几个持久化方法如UserDefault,plist,归档与解档等。
+沙盒机制：  iOS应用程序放在独立、封闭、安全的空间，其他应用只能通过特定的API共享数据
+ Bundle容器：只读（获取）:xxxx.app包中的内容
+ Data容器：读、写
+ Documents：程序运行过程中产生的文件，用于存储大文件或需要频繁更新的数据，能够进行iTunes备份
+  NSArray *array=NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, 
+ NSUserDomainMask,YES); NSString *documentPath=array[0]; 
+ Library：从网络下载资源(图片/音频等)，存储那些不能被用户看见的大部分文件文件
+  NSArray *array=NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, 
+ NSUserDomainMask,YES); NSString *libraryPath=array[0]; 
+  Preferences：存放应用程序的设置、配置数据
+  Caches： NSArray *array=NSSearchPathForDirectoriesInDomains(NSCachesDirectory, 
+ NSUserDomainMask,YES); NSString *cachesPath=array[0]; 
+   缓存资源(图片/音频等)，它不会被备份但会在应用升级过程中保留
+ Temp：存放临时文件的目录，不会应用升级过程中保留还会时不时的被删除
+  NSString *tmpPath=NSTemporaryDirectory();
+数据持久化：  将业务数据对象存储在持久化介质上，并同时提供查询修改的手段。memory—&gt;disk
+    +(instancetype)data;
+ +(instancetype)dataWithBytes:(const void*)bytes length:(NSUinteger)length;
+ +(instancetype)dataWithContentsOfFile:(NSString*)path;
+ +(instancetype)dataWithContentsOfURL:(NSURL*)url;
+   NSMutableData
+    -(void)appendBytes:length:拼接数据
+ -(void)appendData:(NSData*)other拼接数据
+ -(void)increaseLengthBy:增加字节数
+ -(void)replaceBytesInRange:withBytes:替换数据 
+ -resetBytesInRange:重置
+  NSString
+   从文件读取
+    initWithContentsOfFile: 
+ stringWithContentsOfFile:encoding:error: 
+ stringWithContentsOfFile:usedEncoding:error: 
+ dataUsingEncoding：将字符串转化为NSData，编码格式有UTF8，UTF16等 
+ initWithData:encoding:将NSData对象转化为NSString
+   存入文件
+    writeToFile:atomically:
+ writeToFile:atomically:encoding:
+    atomatically:是否将数据内容保存在临时文件中
+   操作路径
+    stringByAppendingPathComponent:以路径的形式拼接字符串
+ stringByAppendingPathExtension:拼接文件的扩展名。
+ stringByDeletingLastPathComponent删除路径最后一个文件/文件夹。 
+ pathComponents拆分路径
+ pathExtension获取文件扩展名
+ lastPathComponent获取路径中文件或文件夹名字。
+  NSArray; NSDictionary等等
+ NSUserDefaults
+  使用
+   1. 获取单例对象standard...
+ 2. 内存-&gt;磁盘(文件)：使用set方法dic[@&quot;key&quot;] = value;
+ 3. 读：通过key获取存在文件中的数据valueForKey
+  注意： /Library/Preferences/BundleIdentifier.plist
+  适用场景：不适合存储”大量”的数据写/读
+ property list：一种XML格式的文件将对象放入列表中.plist。通常用于存储中小型数据
+  数据类型：NSArray NSMutableArray NSDictionary NSMutableDictionary  
+ NSString NSMutableString NSData NSMutableData NSNumber
+  读写文件
+   initWithContentsOfFile:和arrayWithContentsOfFile:从列表读取数据创建NSArray对象。 
+ initWithContentsOfFile和dictionaryWithContentsOfFile:从列表读取数据创建字典对象 
+ writeToFile:atomically把NSDictionary或NSArray对象写入属性列表。 
+  适用场景
+   1. 优势：一次性把plist所有的数据全都读出来(批量处理数据) 
+ 2. 缺点：只支持基本的数据类型(String/Data/Date/Array/Number/Dictionary) 
+ 归档与解档：为了便于数据传输，先将归档对象序列化为文件再通过反归档将数据恢复到对象中
+  NSCoding协议
+   -(void)encodeWithCoder:(NSCoder*)aCoder; 
+ -(id)initWithCoder:(NSCoder*)aDecoder;
+  NSKeyedArchiver
+   首先创建一个NSKeyedArchiver归档对象 
+ 然后通过encodeObject方法进行编码
+ 最后使用finishEncoding方法结束编码
+   创建NSData对象：NSMutableData *data=[NSMutableData data];
+ 创建NSKeyedArchiver归档对象：NSKeyedArchiver *keyedArchiver=[[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+ 将对象进行编码：[keyedArchiver encodeObject:person forKey:@&quot;obj&quot;];
+ 结束编码：[keyedArchiver finishEncoding];
+  NSKeyedUnarchiver
+   NSKeyedUnarchiver *unarchiver=[[NSKeyedUnarchiver alloc]initForReadingWithData:data];
+ TRPerson *newPerson=[unarchiver decodeObjectForKey:@&quot;obj&quot;];
+ [keyedArchiver finishDecoding];
+  自定义模型类步骤： 遵循NSCoding协议-&gt; 实现两个方法(编码/解码) -&gt;对模型类所有的属性进行编码/解码 
+  适用场景： 必须遵守NSCoding协议，支持任何类型（包括自定义类型）
+- (IBAction)writeDataToFile:(id)sender {
+ NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+ [defaults setBool:YES forKey:@&quot;logIn&quot;];
+ [defaults setInteger:24 forKey:@&quot;count&quot;];
+ NSArray *array=@[@&quot;Maggie&quot;,@&quot;Jonny&quot;];
+ [defaults setObject:array forKey:@&quot;name&quot;];
+ //强制把设置的值写入文件中
+ [defaults synchronize];
+}
+//获取数据
+- (IBAction)getDataFromFile:(id)sender {
+ NSUserDefaults *defaults=[NSUserDefaults standardUserDefaults];
+ BOOL log=[defaults boolForKey:@&quot;logIn&quot;];
+ NSInteger count=[defaults integerForKey:@&quot;count&quot;];
+ NSArray *myName=[defaults objectForKey:@&quot;name&quot;];
+ NSLog(@&quot;bool:%d	Integer:%ld
+NSObject:%@&quot;,log,count,myName);
+}
+//写入和读取plist数据
+- (IBAction)writeAndReadFromPlist:(id)sender {
+ NSString *documentPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)firstObject];
+ self.plistPath=[documentPath stringByAppendingPathComponent:@&quot;test.plist&quot;];
+ NSDictionary *dic=@{@&quot;name&quot;:@&quot;Jonny&quot;,@&quot;skills&quot;:@[@&quot;fly&quot;,@&quot;job&quot;,@&quot;Ruby&quot;,@&quot;Python&quot;]};
+ [dic writeToFile:self.plistPath atomically:YES];
+ //从指定路径读取plist文件中的数据
+ NSDictionary *readDic=[[NSDictionary alloc]initWithContentsOfFile:self.plistPath];
+ NSLog(@&quot;读取的数据：%@&quot;,readDic);
+}
+//Xcode创建plist文件，添加数据，读出来。
+- (IBAction)createPlistAndReadData:(id)sender {
+ //获取test.plist文件路径
+ NSString *plistPath=[[NSBundle mainBundle]pathForResource:@&quot;test&quot; ofType:@&quot;plist&quot;];
+ NSArray *dataArray=[[NSArray alloc]initWithContentsOfFile:plistPath];
+ for(NSDictionary *dic in dataArray){
+  NSLog(@&quot;dic:%@&quot;,dic);
+ }
+ NSLog(@&quot;%@&quot;,[dataArray[0] valueForKey:@&quot;name&quot;]);
+}
+//使用归档的方式把数组中的数据存到指定的文件。(写入的过程）
+- (IBAction)writeDataByArchiving:(id)sender {
+ //数据源
+ NSArray *array=@[@&quot;Jonny&quot;,@18,@[@&quot;Swift&quot;,@&quot;Java&quot;,@&quot;C&quot;]];
+ //1.创建可变数据类型
+ NSMutableData *mutableData=[NSMutableData data];
+ //2.创建归档对象
+ NSKeyedArchiver *archiver=[[NSKeyedArchiver alloc]initForWritingWithMutableData:mutableData];
+ //3.对存入的数据进行二进制编码
+ [archiver encodeObject:array forKey:@&quot;array&quot;];
+ //4.执行完成编码操作
+ [archiver finishEncoding];
+ //5.将编码完的对象写入文件中。
+ [mutableData writeToFile:self.archivingFilePath atomically:YES];
+ NSLog(@&quot;编码后的文件长度：%ld&quot;,mutableData.length);
+}
+//使用解档的方式读取数据
+- (IBAction)readDataByUnarchiving:(id)sender {
+ //1.从文件中读取数据
+ NSData *readData=[NSData dataWithContentsOfFile:self.archivingFilePath];
+ //2.创建解码对象
+ NSKeyedUnarchiver *unarchiver=[[NSKeyedUnarchiver alloc]initForReadingWithData:readData];
+ //3.进行解码
+ NSArray *array=[unarchiver decodeObjectForKey:@&quot;array&quot;];
+ //4.执行完成解码
+ [unarchiver finishDecoding];
+ NSLog(@&quot;解档之后的数据:%@&quot;,array);
+}
+#pragma mark 自定义归档解档
+- (IBAction)CustomEncoding:(id)sender {
+ NSLog(@&quot;自定义归档:%s&quot;,__func__);//这句话写在方法里面会打印提示这个方法什么时候调用
+ Student *firstStudent=[[Student alloc]initWithName:@&quot;旺财&quot; Age:18];
+ Student *secondStudent=[[Student alloc]initWithName:@&quot;阿黄&quot; Age:22];
+ //归档
+ NSMutableData *data=[NSMutableData data];
+ NSKeyedArchiver *archiver=[[NSKeyedArchiver alloc]initForWritingWithMutableData:data];
+ [archiver encodeObject:firstStudent forKey:@&quot;first&quot;];
+ [archiver encodeObject:secondStudent forKey:@&quot;secend&quot;];
+ [archiver finishEncoding];
+ [data writeToFile:self.archivingFilePath atomically:YES];
+ //解档
+ NSData *readData=[NSData dataWithContentsOfFile:self.archivingFilePath];
+ NSKeyedUnarchiver *unarchiver=[[NSKeyedUnarchiver alloc]initForReadingWithData:readData];
+ Student *firstStudentFromFile=[unarchiver decodeObjectForKey:@&quot;first&quot;];
+ Student *secondStudentFromFile=[unarchiver decodeObjectForKey:@&quot;secend&quot;];
+ [unarchiver finishDecoding];
+NSLog(@&quot;name:%@;%@;age:%ld,%ld&quot;,firstStudentFromFile.name,secondStudentFromFile.name,firstStudentFromFile.age,secondStudentFromFile.age);
+}
+@end
+</string>
+	<key>DownLoadViewController</key>
+	<string>这是图片或者数据下载模型，包含了图片缓存原理，沙盒机制等。
+
+图片缓存原理
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ self.scrollView.frame=self.view.frame=CGRectMake(self.view.bounds.size.width/2, 10, 0, 0);
+  [UIView animateWithDuration:2 animations:^{
+   self.scrollView.frame=self.view.frame=CGRectMake(100, 100, 300, 600);
+  }];
+ //动画开始
+ [self.activity startAnimating];
+ //实现图片缓存的原理
+ //首先判断字典中是否有图片
+ Student *imageCenter=[Student sharedImageCenter];
+ UIImage *image=imageCenter.mutableDic[self.imageURL.absoluteString];
+ if (image) {
+  //字典中有数据，直接显示
+  [self updateImageView:image];
+ }else{
+  //字典中没有数据，从沙盒指定的文件中读取
+  NSString *imagePath=[self getImagePathFromSandbox:self.imageURL];
+  NSData *imageData=[NSData dataWithContentsOfFile:imagePath];
+  if (imageData) {
+   //沙盒中有
+   [self updateImageView:[UIImage imageWithData:imageData]];
+  }else{
+   //字典和沙盒都没有，从网络下。
+   [self startDownloadAndStore];
+  }
+ }
+}
+-(void)startDownloadAndStore{
+ //使用GCD下载图片
+ dispatch_async(dispatch_get_global_queue(0, 0), ^{
+  NSData *imageData=[NSData dataWithContentsOfURL:self.imageURL];
+  UIImage *image=[UIImage imageWithData:imageData];
+  //存入字典中
+  Student *imageCenter=[Student sharedImageCenter];
+  imageCenter.mutableDic[self.imageURL] = image;
+  //存到沙盒中
+  NSString *imagePath = [self getImagePathFromSandbox:self.imageURL];
+  [imageData writeToFile:imagePath atomically:YES];
+  dispatch_async(dispatch_get_main_queue(), ^{
+   //更新UI
+   [self updateImageView:image];
+  });
+ });
+}
+-(NSString*)getImagePathFromSandbox:(NSURL*)imageURL{
+ //需求：XXX/library/caches/photo_%d.jpg
+ NSString *caches=[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)firstObject];
+ //NSURL取地址的最后一个组件。component
+ return [caches stringByAppendingPathComponent:[imageURL lastPathComponent]];
+}
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView{
+ return self.imageView;
+}
+</string>
+	<key>DownloadProgressViewController</key>
+	<string>这是下载进程监控模型。包含下载任务和数据任务。通过代理协议实现方法监控每一次返回多少数据。
+
+#pragma mark download
+-(IBAction)startOrPauseDownloadAndShowProgress:(UIButton*)sender{
+ ////开始下载
+ if (!sender.selected) {
+ //需求：监控下载进度，更新进度视图
+  if(!self.session){
+   //1.和config结合的session结合.default一般选择，自动缓存文件等到磁盘中。
+   //ehemeral：临时的，自动缓存文件到内存中。background后台：自动使用子线程处理缓存文件等。
+   NSURLSessionConfiguration *config=[NSURLSessionConfiguration defaultSessionConfiguration];
+   //代理方法在子线程中执行
+   NSOperationQueue *queue=[NSOperationQueue new];
+   self.session=[NSURLSession sessionWithConfiguration:config delegate:self delegateQueue:queue];
+   //2.下载任务数据任务一样
+   self.task=[self.session downloadTaskWithURL:[NSURL URLWithString:@&quot;http://cdn.y.baidu.com/yinyueren/005904bbf1dbb81d2ea8480d04982207.MP3&quot;]];
+  }else{////继续下载
+   //创建一个新的任务（从resumeData接着往后下载）；执行。
+   self.task=[self.session downloadTaskWithResumeData:self.resumeData];
+  }
+ //3.执行任务
+ [self.task resume];
+ }else{
+  ////暂停
+  [self.task cancelByProducingResumeData:^(NSData * _Nullable resumeData) {
+   //把resumeData存起来
+   self.resumeData=resumeData;
+   self.task=nil;
+  }];
+ }
+ sender.selected=!sender.selected;
+}
+#pragma mark DownloadDelegate
+//监听进度/*bytesWritten:totalBytesWritten:totalBytesExpectedToWrite:*/
+-(void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didWriteData:(int64_t)bytesWritten totalBytesWritten:(int64_t)totalBytesWritten totalBytesExpectedToWrite:(int64_t)totalBytesExpectedToWrite{
+ //回到主线程更新界面
+ dispatch_async(dispatch_get_main_queue(), ^{
+  self.progressView.progress=totalBytesWritten*1.0/totalBytesExpectedToWrite;
+ });
+}
+//监听下载结束(自动存到location中:/tmp文件夹下)
+- (void)URLSession:(NSURLSession *)session downloadTask:(NSURLSessionDownloadTask *)downloadTask didFinishDownloadingToURL:(NSURL *)location {
+ NSLog(@&quot;已经下载完成:%@；%@&quot;, location, [NSThread currentThread]);
+ // UIImage *image = [UIImage imageWithContentsOfFile:location.path];
+ NSFileManager *fileManager=[NSFileManager defaultManager];
+ NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+ NSString *filePath = [cachesPath stringByAppendingPathComponent:downloadTask.response.suggestedFilename];
+ if(![fileManager fileExistsAtPath:filePath]){//不存在，创建文件
+  [fileManager createFileAtPath:filePath contents:nil attributes:nil];
+ }
+ [fileManager moveItemAtPath:location.path toPath:filePath error:nil];
+ UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+ //回到主线程
+ dispatch_async(dispatch_get_main_queue(), ^{
+  self.imageView.image = image;
+ });
+}
+#pragma mark sessionDataDelegate
+//调用多次,每次返回一段下载的数据
+-(void)URLSession:(NSURLSession *)session dataTask:(NSURLSessionDataTask *)dataTask didReceiveData:(NSData *)data{
+ NSLog(@&quot;返回数据%lu&quot;,(unsigned long)data.length);
+ //v2使用文件句柄对象将每次返回的data写入文件
+ [self.writeFileHandle writeData:data];
+ //将每次服务器返回的新的数据data存储到mutableData的后面。
+ [self.mutableData appendData:data];
+ //更新进度视图
+self.progressView.progress=dataTask.countOfBytesReceived*1.0/dataTask.countOfBytesExpectedToReceive;
+ //更新imageView
+ //self.imageView.image=[UIImage imageWithData:self.mutableData];
+}
+//监听下载完毕
+-(void)URLSession:(NSURLSession *)session task:(NSURLSessionTask *)task didCompleteWithError:(NSError *)error{
+ NSLog(@&quot;下载完成:%@&quot;,error.userInfo);
+ //self.player=[[AVAudioPlayer alloc]initWithContentsOfURL:audioURL error:&amp;error];
+ self.player=[[AVAudioPlayer alloc]initWithData:self.mutableData error:nil];
+ [self.player play];
+}
+</string>
+	<key>DownloadWebResourceViewController</key>
+	<string>这是下载网络资源的模型，内含子县城下载任务和主线程显示
+
+- (IBAction)startDownloadByDataTask:(id)sender {
+ //准备工作：图片url
+ NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@&quot;http://www.egouz.com/uploadfile/2015/0305/20150305103644803.jpg&quot;]];
+ //1.获取单例session对象(不想监控下载进度)
+ NSURLSession *session = [NSURLSession sharedSession];
+ //2.创建数据任务//它自动进入子线程下载。
+ NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+  NSLog(@&quot;服务器返回:%@&quot;, [NSThread currentThread]);
+  NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+  if (statusCode == 200) {
+   //data -&gt; imageView
+   UIImage *image = [UIImage imageWithData:data];
+   //主队列异步执行 -》 回到主线程赋值
+   dispatch_async(dispatch_get_main_queue(), ^{
+    self.imageView.image = image;
+   });
+  } else {
+   NSLog(@&quot;下载失败:%@&quot;, error.userInfo);
+  }
+ }];
+ //3.执行任务
+ [dataTask resume];
+}
+- (IBAction)startDownlodByDownloadTask:(id)sender {
+ //准备工作
+ NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@&quot;http://www.egouz.com/uploadfile/2015/0305/20150305103644803.jpg&quot;]];
+ //1.单例session
+ NSURLSession *session = [NSURLSession sharedSession];
+ //2.创建下载任务
+ NSURLSessionDownloadTask *task = [session downloadTaskWithRequest:request completionHandler:^(NSURL * _Nullable location, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+  NSLog(@&quot;服务器返回:%@&quot;, [NSThread currentThread]);
+  NSLog(@&quot;图片存到:%@&quot;, location);
+  //需求二：直接显示,不想保存
+  //  UIImage *image = [UIImage imageWithContentsOfFile:location.path];
+  //需求一：移动Caches下面，再显示
+  //为防止瞬间就被删除缓存，在location下的文件移动到/Libary/Caches/...
+  //只要是在block中，图片在；location下的文件移动到/Libary/Caches/...(响应的另一个属性)
+  NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+  NSString *filePath = [cachesPath stringByAppendingPathComponent:response.suggestedFilename];
+  //MIME: image/png; image/jpeg; image/gif
+  //移动
+  NSError *fileError = nil;
+  [[NSFileManager defaultManager] moveItemAtPath:location.path toPath:filePath error:&amp;fileError];
+  if ([(NSHTTPURLResponse*)response statusCode]==200||(!fileError)) {
+   //UIImage从filePath读取
+   UIImage *image = [UIImage imageWithContentsOfFile:filePath];
+   //回到主线程显示
+   dispatch_async(dispatch_get_main_queue(), ^{
+    self.imageView.image = image;
+   });
+  }
+ }];
+ //3.执行任务
+ [task resume];
+}
+</string>
+	<key>GCDViewController</key>
+	<string>这是多线程变成技术的GCD技术。包含了GCD和NSOperation两个多线程技术，以及使用方法。
+ CGD：CGD是GrandCentralDispatch中央任务分发中心的简称。 GCD在工作时会自动利用更多的处理器核心，以充分利用更强大的机器，它是基于C语言的API 。
+  作用： GCD完全由系统管理线程，不需要编写线程代码，只需定义想要执行的任务，然后添加到适当的调度队列（dispatch queue）; GCD会负责创建管理线程和调度的任务。
+   Dispath queue的理念是将长期运行的任务拆分成多个工作单元添加到dispath queue中，系统会管理这些队列在多个线程上执行工作，无需直接启动和管理后台线程
+   并发队列同时执行的任务数量会根据应用和系统动态变化，影响因素包括：可用核数量，其他进程正在执行的工作数量，其它串行队列中优先任务的数量等。 
+   可以使用串行queue来替代锁保护共享资源或可变的数据结构，串行队列确保任务按可预测的顺序执行，而且异步地提交任务到串行队列永远不会产生死锁。
+  使用
+   1. 创建空队列(串行/并行)2. 创建任务(逻辑)3. 添加到队列中4. 执行(同步/异步)
+  创建队列
+   Dispatch_get_current_queue; 
+ dispatch_get_main_queue; 
+ dispatch_get_global_queue; 
+ dispatch_queue_create(&quot;myCreateQueue&quot;,NULL); 
+ dispatch_queue_concurrent(&quot;myConcurrentQueue&quot;,NULL); 
+  同步执行
+   Dispatch_sync(queque,^{ NSLog(@&quot;当前线程：%@&quot;,[NSThread currentThread]);});
+  异步执行
+   Dispatch_async(queue,^{ NSLog(@&quot;当前线程:%@&quot;,[NSThread currentThread]); }];
+  一次性任务
+   static dispatch_once_t onceToken; dispatch_once(&amp;onceToken, ^{}); 
+  组合任务
+   Dispatch_group_t group=dispatch_group_creat(); 
+ Dispatch_group_async(group,dispatch_get_global_queue(0,0),^{NSLog@&quot;任务1&quot;;}); 
+ Dispatch_group_async(group,dispatch_get_global_queue(0,o),^{NSLog@&quot;任务2&quot;;}); 
+ Dispatch_group_notify函数用来指定额外的block在group中所有任务完成后执行。
+  队列的暂停和继续
+   使用dispatch_suspend函数暂停一个队列以阻止它执行block对象； 
+ 使用dispatch_resume函数继续dispatch queue；
+  队列的内存管理
+   当创建串行分发队列时引用计数为1，dispatch_retain和dispatch_release函数操控
+  GCD常用样例
+   子线程下载图片(全局队列异步执行)：回到主线程更新UI(主队列异步执行) 
+ dispatch_async(dispatch_get_global_queue(0, 0), ^{NSLog@&quot;下载图片&quot; 
+ dispatch_async(dispatch_get_main_queue(), ^{NSLog@&quot;刷新界面&quot;});});} 
+   队列执行 串行队列 并行/全局 主队列
+ 同步执行 串行同步 并行同步 主队列同步
+ 异步执行 串行异步 并行异步 主队列异步
+ NSOperation：  将需要执行的操作放进一个队列，由队列来分配线程管理执行操作。
+  作用
+   1. 指定同时可以多少个任务一起执行(3个/5个)
+ 2. 把正在运行的任务暂停 (某个时候再接着执行)
+ 3. 把正在运行的任务取消 (再也不能执行) 
+ 4. 设置任务之间的依赖关系
+  使用
+   1. 创建队列(主队列/主线程执行 + 非主队列)
+ 2. 创建任务并添加到队列中
+ 3. 同步和异步执行
+  NSInvocationOperation
+   创建
+    - (id)initWithTarget:(id)target selector:(SEL)sel object:(id)arg; - (void)start; 
+   优先级
+    - (NSOperationQueuePriority)queuePriority; - (void)setQueuePriority:()queuePriority; 
+ NSOperationQueuePriorityVeryLow = -8L,Low = -4L, Normal = 0, High = 4, VeryHigh = 8 
+   监听某操作完毕
+    - (void (^)(void))completionBlock; - (void)setCompletionBlock:(void (^)(void))block; 
+   依赖
+    [operationB addDependency:operationA];
+   延迟
+    [self performSelector:@selector(run) withObject:nil afterDelay:2.0]; dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{}); 
+  NSBlockOperation
+   同步执行
+    NSBlockOperation *operation=[NSBlockOperation blockOperationWithBlock:^(){ NSLog(@&quot;执行了一个新操作&quot;);}]; [operation start]; 
+   异步执行
+    NSBlockOperation *operation=[NSBlockOperation blockOperationWithBlock:^(){ NSLog(@&quot;执行第一个操作&quot;);}]; 
+ [operation addExecutionBlock:^(){ NSLog(@&quot;又执行了一个新的操作&quot;);}]; 
+ [operation start]; 
+   取消和完成操作
+    执行完毕后做一些操作Operation.completionBlock=^(){ NSLog(@&quot;执行完毕&quot;);}; 
+    取消操作： [operation cancel];- (void)cancelAllOperations;- (BOOL)isCancelled
+   暂停和恢复
+    - (void)setSuspended:(BOOL)b; - (BOOL)isSuspended; 
+  自定义NSOperation
+   - (void)addOperationWithBlock:(void (^)(void))block;
+   自定义子类继承NSOperation，实现内部相应的方法。 
+ NSInvocationOperation *operation=[[NSInvocationOperation alloc]initWithTarget:self selector:@selector(run:)object:nil]; 
+ NSOperationQueue *operationQueue=[[NSOperationQueue alloc]init]; 
+ operationQueue.maxConcurrentOperationCount=1; 
+ [operationQueue addOperation:operation]; [operation start];
+单利
++(id)sharedData{
+ static dispatch_once_t onceTocken;
+ dispatch_once(&amp;onceTocken, ^{
+  allData=[[AllTheFileData alloc]init];
+ });
+ return allData;
+}
++(instancetype)alloc{
+ static dispatch_once_t onceTocken;
+ dispatch_once(&amp;onceTocken, ^{
+  allData=[super alloc];
+ });
+ return allData;
+}
+</string>
+	<key>GeoCodingViewController</key>
+	<string>这是地图编码模型。内含地理编码和反地理编码还有定位功能，需要在user.plist添加允许定位的key。其中self.coder只能使用一次，因此反编码需要在那个编码的block里面才能解码出来信息。地图上面有个长按手势停止定位。
+
+-(void)geographyCodingAndUncoding{
+ //地理编码：（城市，地区-》经纬度）
+ NSString *cityName=@&quot;上海&quot;;
+ [self.coder geocodeAddressString:cityName completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) {
+  //返回的速度慢
+  if (!error) {
+   for (CLPlacemark *placemark in placemarks) {
+    NSLog(@&quot;返回的地标信息:%f:%f&quot;,placemark.location.coordinate.longitude,placemark.location.coordinate.latitude);
+   }
+  }
+  //反地理编码
+  CLLocation *location=[[CLLocation alloc]initWithLatitude:29.554 longitude:118.2432];
+  [self.coder reverseGeocodeLocation:location completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) {
+   //经纬度所在的详细信息（字典）
+   if(!error){
+    for (CLPlacemark *placemark in placemarks) {
+     NSLog(@&quot;详细信息:%@&quot;,placemark.addressDictionary);
+    }
+   }
+  }];
+ }];
+}
+#pragma mark ManagerDelegate 以下是定位的相关知识
+//用户是否同意
+-(void)locationManager:(CLLocationManager *)manager didChangeAuthorizationStatus:(CLAuthorizationStatus)status{
+ switch (status) {
+  case kCLAuthorizationStatusAuthorizedWhenInUse://设置精确度(didUpdateLocation调用次数.单位：米
+   self.manager.distanceFilter=10;[self.manager startUpdatingLocation];break;
+  case kCLAuthorizationStatusNotDetermined:NSLog(@&quot;用户不允许定位&quot;);
+  default:break;
+ )
+}
+//用户的位置
+-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray&lt;CLLocation *&gt; *)locations{
+ for (CLLocation *location in locations) {
+  NSLog(@&quot;%f,%f&quot;,location.coordinate.latitude,location.coordinate.longitude);
+ }
+}
+</string>
+	<key>JSONParsingViewController</key>
+	<string>这是JSON格式解析模型。模型转对象。
+POST JSON示例程序
+ NSString *urlString = @&quot;http://localhost/postjson.php&quot;; 
+ NSURL *url = [NSURL URLWithString:urlString]; 
+ NSMutableURLRequest *requestM = [NSMutableURLRequest requestWithURL:url cachePolicy:0 timeoutInterval:2.0f]; 
+ requestM.HTTPMethod = @&quot;POST&quot;; 
+ requestM.HTTPBody = [NSJSONSerialization dataWithJSONObject:obj options:0 error:NULL]; 
+ [NSURLConnection sendAsynchronousRequest:requestM queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *connectionError) { 
+ NSString *result = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];NSLog(@&quot;%@&quot;, result); }]; 
+JSON数据解析
+ JSON
+  与XML文档结构相比描述项目的字符少，传输速度会提高，而流量会减少。
+ JSON的文档结构
+  {”people”:[{“firstName”:”Brett”,”lastName”:”Mcla”,”email”:”aaaa”},{“firstName”:”Jason”}]} 
+ JSON解析
+  第三方框架：JSONKit、SBJson、TouchJSON（性能从左到右，越差） 
+ 苹果原生（自带）：NSJSONSerialization（性能最好） 
+ + (id)JSONObjectWithData:(NSData *)data options:(NSJSONReadingOptions)opt error:(NSError **)error; 
+ + (NSData *)dataWithJSONObject:(id)obj options:(NSJSONWritingOptions)opt error:(NSError **)error; 
+ 使用URL获取服务器返回的JSON： NSURLSession - 单例session - 数据任务dataTask 
+//给定字典(data)，返回TRWeather模型对象组成的数组
++ (NSArray *)getAllWeatherData:(NSDictionary *)dataDic;
+@end//
+#import &quot;JSONParsingTool.h&quot;
+#import &quot;JSONParsingData.h&quot;
+@implementation JSONParsingTool
++ (NSArray *)getAllWeatherData:(NSDictionary *)dataDic {
+ //循环解析
+ NSArray *weatherArray = dataDic[@&quot;weather&quot;];
+ //可变数组
+ NSMutableArray *mutableArray = [NSMutableArray array];
+ for (NSDictionary *weatherDic in weatherArray) {
+  JSONParsingData *weather = [JSONParsingData parseWeatherJson:weatherDic];
+  [mutableArray addObject:weather];
+ } 
+ return [mutableArray copy];
+}
++ (id)parseWeatherJson:(NSDictionary *)weatherDic {
+ return [[self alloc] initWithWeather:weatherDic];
+}
+- (id)initWithWeather:(NSDictionary *)weatherDic {
+ if (self = [super init]) {
+  //解析并赋值
+  self.date = weatherDic[@&quot;date&quot;];
+  self.tempMax = weatherDic[@&quot;tempMaxC&quot;];
+  self.tempMin = weatherDic[@&quot;tempMinC&quot;];
+ }
+ return self;
+}
+</string>
+	<key>MKMapViewController</key>
+	<string>这是地图定位模型，内含地图定位，加载大头针，自定义大头针样子和图片等。其中自定义大头针图片用的是父类，而设置动画和渲染颜色等使用子类，貌似有点矛盾和不兼容。不太清楚。内含点击手势，点击三次就给地图添加大头针
+
+//定位到用户位置
+-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation{
+ NSLog(@&quot;用户的位置:%f %f %@  %@&quot;,userLocation.location.coordinate.latitude,userLocation.location.coordinate.longitude,userLocation.title,userLocation.subtitle);
+ //修改点中蓝色圈弹出框的内容
+ userLocation.title=@&quot;1501&quot;;
+ userLocation.subtitle=@&quot;Fighting&quot;;
+}
+//监控地图发生移动（停止移动即会调用）
+-(void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated{
+ //regin是显示在设备上的，能看到的区域
+ NSLog(@&quot;地图发生移动&quot;);
+}
+- (void)addAnnotation {
+ //创建大头针对象
+ Annotation *annotation=[[Annotation alloc]init];
+ //设置三个属性
+ double latitude=31.1+(arc4random()%10)*1.0/100;
+ double longitude=121.5+(arc4random()%10)*1.0/100;
+ annotation.coordinate=CLLocationCoordinate2DMake(latitude, longitude);
+ annotation.title=@&quot;大学&quot;;
+ annotation.subtitle=@&quot;这是大学的详细介绍内容&quot;;
+ annotation.image=[UIImage imageNamed:@&quot;icon_paopao_waterdrop_streetscape@2x.png&quot;];
+ //添加到地图视图上
+ [self.mapView addAnnotation:annotation];
+ //移动地图到添加大头针的位置，设置region
+ MKCoordinateSpan span=MKCoordinateSpanMake(1, 1);//跨度
+ MKCoordinateRegion region=MKCoordinateRegionMake(annotation.coordinate,span);//中心位置和跨度
+ [self.mapView setRegion:region];
+}
+//当调用addannotation时就会调用该方法设置大头针的视图。用户默认蓝色的圈就是大头针对象，也会调用这个方法
+-(MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id&lt;MKAnnotation&gt;)annotation{
+ //判断添加的annotation是否是用户默认的蓝色
+ if ([annotation isKindOfClass:[MKPinAnnotationView class]]) {
+  return nil;//表明是默认的蓝色，直接返回nil
+ }
+ //需求：修改默认的大头针的图片.MKAnnotationView是MKPinAnnotation类的父类。需要用它的父类去修改图片
+ //大头针视图的重用机制
+ static NSString *identifier=@&quot;annotation&quot;;
+ MKAnnotationView *annoView= [mapView dequeueReusableAnnotationViewWithIdentifier:identifier];
+ if(!annoView){
+  annoView=[[MKAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier];
+  //大头针对象和大头针视图之间的关系，颜色，动画
+  //annoView=[[MKPinAnnotationView alloc]initWithAnnotation:annotation reuseIdentifier:identifier1];
+  //annoView.animatesDrop=YES;
+  //annoView.backgroundColor=[UIColor redColor];
+  //annoView.pinTintColor=[UIColor greenColor];
+  //annoView.canShowCallout=YES;
+  annoView.image=[UIImage imageNamed:@&quot;超能 (3).png&quot;];
+  annoView.bounds=CGRectMake(0, 0, 40, 40);
+  Annotation *anno=(Annotation*)annotation;
+  annoView.image=anno.image;
+  //设置弹出框的左右视图
+  annoView.leftCalloutAccessoryView=[[UISwitch alloc]init];
+  annoView.rightCalloutAccessoryView=[UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+  annoView.canShowCallout=YES;
+ }else{//有可重用的大头针视图
+  annoView.annotation=annotation;
+ }
+ return annoView;
+}</string>
+	<key>MapOfRouteGuidanceViewController</key>
+	<string>这是地图导航功能的模型。内含北京和上海两座城市的字符串添加大头针，绘制导航路线以及打印详细的路线信息。
+
+- (void)startDrawLines {
+ NSString *startPoint=@&quot;北京&quot;;
+ NSString *endPoint=@&quot;上海&quot;;
+ //创建CLGeoCoder对象
+ CLGeocoder *coder=[CLGeocoder new];
+ [coder geocodeAddressString:startPoint completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) {
+  //假设返回一个，或者返回多个，只取一个
+  CLPlacemark *placemark=[placemarks lastObject];
+  //添加大头针
+  MKPointAnnotation *annotation=[MKPointAnnotation new];
+  annotation.coordinate=placemark.location.coordinate;
+  annotation.title=startPoint;
+  [self.mapView addAnnotation:annotation];
+  //地理编码起点
+  [coder geocodeAddressString:endPoint completionHandler:^(NSArray&lt;CLPlacemark *&gt; * _Nullable placemarks, NSError * _Nullable error) {
+   //取最后一项
+   CLPlacemark *endPlacemark=[placemarks lastObject];
+   MKPointAnnotation *endannotation=[MKPointAnnotation new];
+   endannotation.coordinate=endPlacemark.location.coordinate;
+   endannotation.title=endPoint;
+   [self.mapView addAnnotation:endannotation];
+   //发送请求，绘制路线
+   [self routeWithStartPoint:placemark withEndPoint:endPlacemark];
+  }];
+ }];
+}
+-(void)routeWithStartPoint:(CLPlacemark*)startPlacemark withEndPoint:(CLPlacemark*)endPlacemark{
+ //请求对象的创建
+ MKDirectionsRequest *request=[MKDirectionsRequest new];
+ //设置请求的起点和终点
+ MKMapItem *sourceItem=[[MKMapItem alloc]initWithPlacemark:[[MKPlacemark alloc]initWithPlacemark:startPlacemark]];
+ MKMapItem *destinationItem=[[MKMapItem alloc]initWithPlacemark:[[MKPlacemark alloc]initWithPlacemark:endPlacemark]];
+ request.source=sourceItem;
+ request.destination=destinationItem;
+ MKDirections *directions=[[MKDirections alloc]initWithRequest:request];
+ [directions calculateDirectionsWithCompletionHandler:^(MKDirectionsResponse * _Nullable response, NSError * _Nullable error) {
+  if (!error) {
+   //获取服务器返回的路线Routes(包含很多Steps）
+   NSArray *routesArray=response.routes;
+   for (MKRoute *route in routesArray) {
+    //从route中获取所有小steps
+    for (MKRouteStep *step in route.steps) {
+     NSLog(@&quot;显示step的详情:%@&quot;,step.instructions);
+    }
+    //添加polyline到地图视图上
+    [self.mapView addOverlay:route.polyline];
+   }
+  }
+ }];
+}
+//只要调用addOverLay方法就会调用下面的协议方法
+-(MKOverlayRenderer*)mapView:(MKMapView *)mapView rendererForOverlay:(id&lt;MKOverlay&gt;)overlay{
+ //划线要创建polyLine对象
+ MKPolylineRenderer *polyLine=[[MKPolylineRenderer alloc]initWithOverlay:overlay];
+ polyLine.lineWidth=3;
+ polyLine.strokeColor=[UIColor redColor];
+ return polyLine;//返回它的子类也是可以的
+}</string>
+	<key>OfficialSocketCommulationViewController</key>
+	<string>这是官方的Socket通信案例，内含键盘弹起和收回的监控和对应操作，以及输入文本转化为数据发送到服务器。</string>
+	<key>OprationFileViewController</key>
+	<string>这是文件操作模型包含沙盒目录，文件拷贝等。
+使用NSFileManger来创建文件夹/文件，拷贝，移动。移动，获取子文件夹/文件
+ //1.获取沙盒根目录
+ //2.获取Documents目录.参数一：指定要搜索的文件夹。参数二：指定用户的作用域，在哪里搜（固定）。参数三：是否需要返回的路径是绝对路径。
+ //3.获取library目录
+ //4.获取temp目录
+ //5.获取bundle容器中图片
+ NSString *bundlePath=[[NSBundle mainBundle]pathForResource:@&quot;test&quot; ofType:@&quot;jpg&quot;];
+ NSString *documentPath=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)firstObject];
+ //拼接文件的绝对路径：XXX/documents/testStr.txt
+ NSError *error=nil;
+ [content writeToFile:self.filePath atomically:YES encoding:NSUTF8StringEncoding error:&amp;error];
+ [array writeToFile:testPath atomically:YES];
+[dic writeToFile:testPath atomically:YES]
+[self.mgr createFileAtPath:testFilePath contents:[content dataUsingEncoding:NSUTF8StringEncoding] attributes:nil];
+[self.mgr copyItemAtPath:sourceFilePath toPath:targetFilePath error:&amp;error]
+[self.mgr removeItemAtPath:deleteFilePath error:&amp;error]
+ NSArray *subFileArray= [self.mgr subpathsOfDirectoryAtPath:testDicPath error:&amp;error];
+ //创建两个NSFileHandle对象，并指示读或写的功能。
+ NSFileHandle *readHandle=[NSFileHandle fileHandleForReadingAtPath:sourcePath];
+ NSFileHandle *writeHandle=[NSFileHandle fileHandleForWritingAtPath:targetPath];
+ //执行操作。
+ NSData *readData=[readHandle readDataToEndOfFile];
+ [writeHandle writeData:readData];
+ [self PrintCacheData:@&quot;小文件写入成功&quot;];
+ // [readHandle readabilityHandler];
+ // [writeHandle writeabilityHandler];
+ //收尾工作：关闭
+ [readHandle closeFile];
+ [writeHandle closeFile];
+ NSDictionary *sourceFileDic= [[NSFileManager defaultManager] attributesOfItemAtPath:sourcePath error:nil];
+ NSNumber *totalSize= [sourceFileDic objectForKey:NSFileSize];
+ [self PrintCacheData:[NSString stringWithFormat:@&quot;%@&quot;,sourceFileDic]];
+ while(isEnd){
+  NSInteger leftSize= [totalSize floatValue]-readSize;
+  //不足5000
+  if(leftSize&lt;readSizePerTime){
+   NSData *leftData= [readHandle readDataToEndOfFile];
+   [writeHandle writeData:leftData];isEnd=NO;
+  }else{
+   //正常每次读5000
+   NSData *readData=[readHandle readDataOfLength:readSizePerTime];
+   readSize+=readSizePerTime;
+   [writeHandle writeData:readData];
+  }
+ }
+ [self PrintCacheData:@&quot;大文件复制成功&quot;];
+ [readHandle closeFile];[writeHandle closeFile];</string>
+	<key>PackageAFNetworkingViewController</key>
+	<string>这是AFNetworking封装的模型。包含发送数据和接收数据。
+
++(void)sendGetRequestWithURL:(NSString *)urlStr parameters:(NSDictionary *)paramDic success:(successBlock)success failure:(failureBlock)failure{
+ //和AFNetworking相关的调用
+ AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+ [manager GET:urlStr parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+  //登陆成功返回responseObject回传控制器
+  success(responseObject);
+ } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+  //登陆失败返回，error回传控制器
+  failure(error);
+ }];
+}
++ (void)sendPostRequestWithURL:(NSString*)urlStr parameters:(NSDictionary *)paramDic success:(successBlock)success failure:(failureBlock)failure{
+ AFHTTPSessionManager *manager=[AFHTTPSessionManager manager];
+ [manager POST:urlStr parameters:paramDic progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id _Nullable responseObject) {
+  success(responseObject);
+ } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+  failure(error);
+ }]; 
+}
+</string>
+	<key>SocketCommunicationViewController</key>
+	<string>这是Socket通信模型。可以给服务器发送数据和接收数据，需要指定服务器的地址和端口号，先输入完整URL然后连接，连接成功后可以发送消息。
+
+- (IBAction)connectToHost:(id)sender {
+ //IP地址+port
+ //初始化clientSocket对象
+ self.clientSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+ //连接
+ uint16_t port = 8888;
+ NSString *ipStr = self.IPTextField.text;
+ NSError *error = nil;
+ [self.clientSocket connectToHost:ipStr onPort:port error:&amp;error];
+ if (error) {
+  [self PrintCacheData:[NSString stringWithFormat:@&quot;无法连接:%@&quot;, error.userInfo]];
+ } else {
+  [self PrintCacheData:[NSString stringWithFormat:@&quot;可以/正在连接。。。。&quot;]];
+ }
+}
+- (IBAction)sendMessageToHost:(id)sender {
+ //发送消息逻辑
+ [self.clientSocket writeData:[self.messageTextField.text dataUsingEncoding:NSUTF8StringEncoding] withTimeout:-1 tag:0];
+}
+-(void)dealloc{
+ //关闭已经连接的socket
+ [self.clientSocket disconnect];
+}
+#pragma mark -- 协议相关方法
+//是否连接成功
+- (void)socket:(GCDAsyncSocket *)sock didConnectToHost:(NSString *)host port:(uint16_t)port {
+ [self PrintCacheData:@&quot;客户端和服务器端的socket连接成功&quot;];
+ //设置客户端处于接收数据的状态(-1：表示不设置超时时间)
+ [self.clientSocket readDataWithTimeout:-1 tag:0];
+}
+//客户端是否发送成功
+- (void)socket:(GCDAsyncSocket *)sock didWriteDataWithTag:(long)tag {
+ [self PrintCacheData:@&quot;客户端已经发送成功&quot;];
+}
+//已经接收到服务器端的数据-&gt;textView
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag {
+ //data-&gt;NSString
+ NSString *dataFromHost = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+ //显示返回的文本到textView上
+ self.showDataFromServer.text = [NSString stringWithFormat:@&quot;%@%@
+&quot;, self.showDataFromServer.text, dataFromHost];
+ //设置客户端处于接收数据的状态
+ [self.clientSocket readDataWithTimeout:-1 tag:0];
+}
+</string>
+	<key>SocketServiceViewController</key>
+	<string>这是Socket通信的服务器端程序，可以接收客户端发送的连接请求和通信。是被动的。
+
+- (void)viewDidLoad {
+ [super viewDidLoad];
+ self.asyncSocket = [[GCDAsyncSocket alloc] initWithDelegate:self delegateQueue:dispatch_get_main_queue()];
+ self.connectedSockets = [[NSMutableArray alloc] init];
+ if (!self.asyncSocket) {
+  NSLog(@&quot;初始化失败&quot;);
+ } else {
+  NSError *error = nil;
+  uint16_t port = 8888;
+  //启动监听
+  if(![self.asyncSocket acceptOnPort:port error:&amp;error]){
+   NSLog(@&quot;启动失败&quot;);
+  }
+ }
+}
+- (IBAction)sendMessageToClient:(id)sender {
+ NSData *data = [self.messageTextField.text dataUsingEncoding:NSUTF8StringEncoding];
+ [self.clientSocket writeData:data withTimeout:5 tag:0];
+}
+#pragma mark - GCDAsyncSocketDelegate
+- (void)socket:(GCDAsyncSocket *)sock didAcceptNewSocket:(GCDAsyncSocket *)newSocket{
+ NSLog(@&quot;Accepted new Socket from %@:%hu&quot;,[newSocket connectedHost],[newSocket connectedPort]);
+ self.clientSocket = newSocket;
+ //newSocket自动设置本身代理为当前控制器
+ //开始读取客户端传入的数据
+ //Timeout:超时。 表示读取多长时间， 传入-1代表没有超时
+ //tag：读取操作的标识
+ [self.clientSocket readDataWithTimeout:-1 tag:100];
+ // [self.connectedSockets addObject:newSocket];
+ // [newSocket readDataWithTimeout:5 tag:0];
+ // [newSocket readDataToData:[GCDAsyncSocket CRLFData] withTimeout:5 tag:0];
+}
+- (void)socket:(GCDAsyncSocket *)sock didReadData:(NSData *)data withTag:(long)tag{
+ AudioServicesPlaySystemSound(1000);
+ NSString *dataStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+ self.messageTextView.text = [NSString stringWithFormat:@&quot;%@%@
+&quot;, self.messageTextView.text, dataStr];
+ //触发完毕之后，则读取操作会被取消,我们需要重新再开启另一个读取
+ [self.clientSocket readDataWithTimeout:-1 tag:100];
+ NSLog(@&quot;New message from client!!!&quot;);
+}
+-(void)socketDidDisconnect:(GCDAsyncSocket *)sock withError:(NSError *)err{
+ self.asyncSocket = nil;
+ self.asyncSocket.delegate = nil;
+}
+-(void)dealloc{
+ [self.asyncSocket setDelegate:nil];
+ [self.asyncSocket disconnect];
+}
+</string>
+	<key>TRMusicDetailViewController</key>
+	<string>这是音乐播放器的模型
+主要将编程思想融入其中，将编程分为模型对象、工具类和视图控制器类。
+1.showDetailViewController:通过添加控制器和视图到window。可以自定义各种视图动画出现。
+2.这里有上一曲，下一曲暂停，继续，数据模型，plist文件解读，文件转对象模型，后台播放，注意player要升为属性。
+3.用定时器监控播放进度并更新界面，用手势跟随拖拉快进等，用代理监控播放完毕之后自动调用下一曲，给视图添加分类定义专辑页面圆形旋转，防止多首音乐同时播放就播放之前先把之前的音乐对象停止并移除
+4.后台音乐播放：创建session(会话)在Info.plist文件中添加key：NSApp backgroundmodes-&gt;audio backgroundplaying 
+5. 音频的生成:采样(40HZ~40KHZ；PCM格式的数据) -&gt; 编码(压缩算法) -&gt; xxx.mp3; xxx.wav; 等
+读取声音文件:读取xx.mp3 -&gt; 解码(解压缩算法) —&gt; 还原声音数据 —&gt; 播放
+包含两个部分：文件格式(音频容器) + 数据格式(音频编码)
+终端的三个命令:mac系统支持的音频格式：afconvert -hf查看指定音频文件的信息：afinfo xxx.mp3转任意的格式：-f: 文件格式-d: 数据格式afconvert -f adts -d aac AllOfMe.mp3 AllOfMe.aac
+真机调试1. AppID：注册一个iCloud邮箱 —&gt; 变成AppID2. 有设备3. 添加AppID到Xcode4.连接手机到mac上5.选择team6.点Fix issue(手机联网)7.设置部署文件8.选择设备9. 运行程序.</string>
+	<key>ThreadViewController</key>
+	<string>这是多线程编程的模型。包含常用的几种多线程技术及其重要方法。如pthread,NSThread,GCD,NSOperation。
+
+多线程编程的技术
+ 进程和线程：进程（process）：正在运行的应用程序
+  线程（thread）： 进程中所包含的一个或多个执行单元称为线程，线程负责执行代码.
+  Main Thread：   控件(数据加载…) -&gt; 原则: UIKit Framework(界面相关控件)的事件/控件
+  Sub Thread：   耗时操作(For循环/下载图片/音频)
+  启动主线程：1M内存(肯定占用).启动子线程512KB内存 不要超过5个子线程
+  多线程： 并发 Concurrent：同时执行很多任务(线程)读取代码并提供给多CPU执行
+   作用：将那些耗时的操作放到另外一个线程中去执行，防止主线程堵塞
+   同步（Synchronize）：  就是一行一行的执行代码，关键词：顺序的，单线程，无并发的；
+   异步（Asynchronize）： 就是多个线程同时执行，关键词：乱序的，多线程的，有并发的。
+ Pthread
+ 1. 主线程一次只能响应任务(用户/数据) -&gt; 主线程阻塞(卡) 
+ 2. 启动子线程执行耗时的操作 
+ 3. 主线程不清楚子线程什么时候完成(可以知道：后面讲) 
+  使用
+   pthread_t pthread;pthread_create(&amp;pthread,NULL,task,NULL); 
+ void *task(void *data){NSLog(@&quot;任务&quot;);};
+ NSThread
+  自主管理线程生命周期；线程同步对数据加锁有系统开销 创建/exit/执行一次/NSLock
+  开启线程
+   NSTread thread=[[NSThread alloc]initWithTarget:self selector:@selector(run:)object:nil]; 
+ [thread start]; 
+ [NSThread detachNewThreadSelector:@selector(run:)toTarget:self withObject:nil]; 
+  方法与属性
+   优先级0~1 + (double)threadPriority;- (double)threadPriority;
+ [NSThread detachNewThreadSelector:@selector(run) toTarget:self withObject:nil];
+ + (void)sleepUntilDate:(NSDate *)date;+ (void)exit;
++(double)threadPriority;+(BOOL)setThreadPriority:(double)p;
+栈空间:thread.stacksize子线程名字：thread.name [thread setName:name] 
+ NSThread *current=[NSThread currentThread]; 
+ NSThread *main=[NSThread mainThread];[NSThread sleepForTimeInterval:2]; 
+ NSThread *thread = [[NSThread alloc] initWithTarget:self selector:@selector(run) object:nil];
+  在线程上操作
+   [self performSelector:@selector(run)withObject:nil];
+   [self performSelectorInBackground:@selector(run:)withObject:nil ];
+   [self performSelectorOnMainThread:@selector(run)withObject:nil waitUntilDone:YES];
+   [self performSelector:@selector(run)onThread:thread withObject:nil waitUntilDone:YES];
+  线程锁： 通过线程锁的方式确保特定的代码块无法同时一次被多个线程执行
+   上锁：NSLock *theLock=[[NSLock alloc]init]; [theLock lock]; 解锁：[theLock unlock]; 
+   @synchronized指令：-(void)myMethod:(id)obj{ @synchronized(obj){ ……}} 
+ NSThread *thread=[[NSThread alloc]initWithTarget:self selector:@selector(downloadTask) object:nil];
+ [thread start];
+ NSLog(@&quot;%@&quot;,[NSThread currentThread]);
+ [NSThread sleepForTimeInterval:3];//中场休息
+ NSData *imageData=[NSData dataWithContentsOfURL:imageURL];
+ UIImage *iamge=[UIImage imageWithData:imageData];
+- (IBAction)creatThreadByDetach:(id)sender {//Detach:分离，剥离
+ [NSThread detachNewThreadSelector:@selector(downloadTask) toTarget:self withObject:nil];
+ //使用场景：简单滴创建并自动执行。
+}
+- (IBAction)creatThreadByPerform:(id)sender {
+ [self performSelectorInBackground:@selector(downloadTask) withObject:nil];
+ //直接让系统自动创建一个后台线程（子线程）
+}
+ int threadError= pthread_create(&amp;pthread, NULL, task, data);
+</string>
+	<key>URLConnectionViewController</key>
+	<string>这是过时的URLConnection模型。
+
+
+- (IBAction)sendSyncRequest:(id)sender {
+ NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlTextField.text]];
+ NSError *error = nil;
+ NSData *htmlData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:&amp;error];
+ [self.webView loadData:htmlData MIMEType:@&quot;text/html&quot; textEncodingName:@&quot;utf-8&quot; baseURL:nil];
+ NSLog(@&quot;加载完毕&quot;);
+}
+- (IBAction)sendAsyncRequest:(id)sender {
+ //尽量掌握：webView加载方式二+获取状态码
+ NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:self.urlTextField.text]];
+ //queue：主队列(block代码在主线程执行)；非主队列(block在子线程执行)
+ [NSURLConnection sendAsynchronousRequest:request queue:[NSOperationQueue mainQueue] completionHandler:^(NSURLResponse * _Nullable response, NSData * _Nullable data, NSError * _Nullable connectionError) {
+ //NSURLResponse: (状态码)data:请求资源的数据(主页/图片。。。)connectionError：错误对象
+  NSLog(@&quot;服务器返回:%@&quot;, [NSThread currentThread]);
+  NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+  if (statusCode == 200) {
+   //成功接收主页(index.html);data加载到webView(方式二)
+   //baseURL:指定加载index.html主页的本地URL(沙盒/Library/Caches/)
+   NSString *cachesPath = [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject];
+   [self.webView loadData:data MIMEType:@&quot;text/html&quot; textEncodingName:@&quot;utf-8&quot; baseURL:[NSURL fileURLWithPath:cachesPath]]; 
+  } else {
+   NSLog(@&quot;返回主页失败:%@&quot;, connectionError.userInfo);
+  }
+ }]; 
+ NSLog(@&quot;加载完毕&quot;);
+}</string>
+	<key>WebViewController</key>
+	<string>这是网页加载模型。内含加载动画和加载的新浪网。
+
+ self.webView=[[UIWebView alloc]initWithFrame:self.view.frame];
+ //创建请求类NSURLRequest
+ NSURL *url = [NSURL URLWithString:@&quot;http://www.sina.com.cn&quot;];
+ NSURLRequest *request = [NSURLRequest requestWithURL:url];
+ //设置代理
+ self.webView.delegate = self;
+ //webView加载/发送请求(异步)
+ [self.webView loadRequest:request];
+#pragma mark - webViewDelegate
+//开始加载(networkActivityIndicator)
+- (void)webViewDidStartLoad:(UIWebView *)webView {
+ [self PrintCacheData:[NSString stringWithFormat:@&quot;%s&quot;, __func__]];
+ //设置indivatorView动画
+ [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+}
+//成功返回,并加载成功
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+ [self PrintCacheData:[NSString stringWithFormat:@&quot;%s&quot;, __func__]];
+ //停止动画
+ [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+//失败返回
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error {
+ [self PrintCacheData:[NSString stringWithFormat:@&quot;失败原因:%@&quot;, error.userInfo]];
+ //停止动画
+ [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+}
+</string>
+</dict>
+</plist>

@@ -1,0 +1,14 @@
+{
+    "FellsLikeC":37,
+    "tempC":25,
+    "request":[
+    {
+    "query":"Beijing,China",
+               "quhao":"01"
+    },
+               {
+               "server":"www.cctv.com"
+               },
+               23
+    ]
+}

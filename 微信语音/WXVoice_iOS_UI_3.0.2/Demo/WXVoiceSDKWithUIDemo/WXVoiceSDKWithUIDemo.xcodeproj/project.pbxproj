@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2746ACC01A19D9A200CC374D /* libmtaWXOsdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2746ACBF1A19D9A200CC374D /* libmtaWXOsdk.a */; };
+		275D8B6019FA336C00646C5B /* libWXVoiceSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 275D8B5F19FA336C00646C5B /* libWXVoiceSDK.a */; };
+		275D8B6219FA338900646C5B /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 275D8B6119FA338900646C5B /* libsqlite3.dylib */; };
+		276A05E818E959C6002778B0 /* RootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 276A05E718E959C6002778B0 /* RootNavigationController.m */; };
+		278D027C18D7F76C00E8CC31 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278D027B18D7F76C00E8CC31 /* UIKit.framework */; };
+		278D027E18D7F76C00E8CC31 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278D027D18D7F76C00E8CC31 /* Foundation.framework */; };
+		278D028018D7F76C00E8CC31 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 278D027F18D7F76C00E8CC31 /* CoreGraphics.framework */; };
+		278D028618D7F76C00E8CC31 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 278D028418D7F76C00E8CC31 /* InfoPlist.strings */; };
+		278D028818D7F76C00E8CC31 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 278D028718D7F76C00E8CC31 /* main.m */; };
+		278D028C18D7F76C00E8CC31 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 278D028B18D7F76C00E8CC31 /* AppDelegate.m */; };
+		27D0AB3818D7F7F000B5FC70 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D0AB3718D7F7F000B5FC70 /* SystemConfiguration.framework */; };
+		27D0AB3A18D7F7F700B5FC70 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D0AB3918D7F7F700B5FC70 /* CoreTelephony.framework */; };
+		27D0AB3C18D7F7FE00B5FC70 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D0AB3B18D7F7FE00B5FC70 /* AudioToolbox.framework */; };
+		27D0AB3E18D7F80600B5FC70 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D0AB3D18D7F80600B5FC70 /* AVFoundation.framework */; };
+		27D0AB4618D7F87F00B5FC70 /* UIColor+WXVoiceColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0AB4118D7F87F00B5FC70 /* UIColor+WXVoiceColor.m */; };
+		27D0AB4718D7F87F00B5FC70 /* WXErrorMsg.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0AB4318D7F87F00B5FC70 /* WXErrorMsg.m */; };
+		27D0AB4818D7F87F00B5FC70 /* WXMsgView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0AB4518D7F87F00B5FC70 /* WXMsgView.m */; };
+		27D0AB7A18D7F88C00B5FC70 /* bg_156.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4A18D7F88B00B5FC70 /* bg_156.png */; };
+		27D0AB7B18D7F88C00B5FC70 /* bg_320x568.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4B18D7F88B00B5FC70 /* bg_320x568.png */; };
+		27D0AB7C18D7F88C00B5FC70 /* btn01.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4C18D7F88B00B5FC70 /* btn01.png */; };
+		27D0AB7D18D7F88C00B5FC70 /* btn02.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4D18D7F88B00B5FC70 /* btn02.png */; };
+		27D0AB7E18D7F88C00B5FC70 /* btn03.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4E18D7F88B00B5FC70 /* btn03.png */; };
+		27D0AB7F18D7F88C00B5FC70 /* btn04.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB4F18D7F88B00B5FC70 /* btn04.png */; };
+		27D0AB8018D7F88C00B5FC70 /* cibiaobtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5018D7F88B00B5FC70 /* cibiaobtn.png */; };
+		27D0AB8118D7F88C00B5FC70 /* close.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5118D7F88B00B5FC70 /* close.png */; };
+		27D0AB8218D7F88C00B5FC70 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5218D7F88B00B5FC70 /* Default-568h@2x.png */; };
+		27D0AB8318D7F88C00B5FC70 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5318D7F88B00B5FC70 /* Default.png */; };
+		27D0AB8418D7F88C00B5FC70 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5418D7F88B00B5FC70 /* Default@2x.png */; };
+		27D0AB8518D7F88C00B5FC70 /* error.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5518D7F88B00B5FC70 /* error.png */; };
+		27D0AB8618D7F88C00B5FC70 /* head.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5618D7F88B00B5FC70 /* head.png */; };
+		27D0AB8718D7F88C00B5FC70 /* hechengbtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5718D7F88B00B5FC70 /* hechengbtn.png */; };
+		27D0AB8818D7F88C00B5FC70 /* icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5818D7F88B00B5FC70 /* icon.png */; };
+		27D0AB8918D7F88C00B5FC70 /* lb_btn1.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5918D7F88C00B5FC70 /* lb_btn1.png */; };
+		27D0AB8A18D7F88C00B5FC70 /* lb_btn2.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5A18D7F88C00B5FC70 /* lb_btn2.png */; };
+		27D0AB8B18D7F88C00B5FC70 /* lb_btn3.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5B18D7F88C00B5FC70 /* lb_btn3.png */; };
+		27D0AB8C18D7F88C00B5FC70 /* lb_btn4.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5C18D7F88C00B5FC70 /* lb_btn4.png */; };
+		27D0AB8D18D7F88C00B5FC70 /* lb_btn5.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5D18D7F88C00B5FC70 /* lb_btn5.png */; };
+		27D0AB8E18D7F88C00B5FC70 /* ok.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5E18D7F88C00B5FC70 /* ok.png */; };
+		27D0AB8F18D7F88C00B5FC70 /* open.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB5F18D7F88C00B5FC70 /* open.png */; };
+		27D0AB9018D7F88C00B5FC70 /* pause001.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6018D7F88C00B5FC70 /* pause001.png */; };
+		27D0AB9118D7F88C00B5FC70 /* pause002.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6118D7F88C00B5FC70 /* pause002.png */; };
+		27D0AB9218D7F88C00B5FC70 /* play001.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6218D7F88C00B5FC70 /* play001.png */; };
+		27D0AB9318D7F88C00B5FC70 /* play002.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6318D7F88C00B5FC70 /* play002.png */; };
+		27D0AB9418D7F88C00B5FC70 /* reset001.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6418D7F88C00B5FC70 /* reset001.png */; };
+		27D0AB9518D7F88C00B5FC70 /* reset002.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6518D7F88C00B5FC70 /* reset002.png */; };
+		27D0AB9618D7F88C00B5FC70 /* shibiebtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6618D7F88C00B5FC70 /* shibiebtn.png */; };
+		27D0AB9718D7F88C00B5FC70 /* voice001.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6718D7F88C00B5FC70 /* voice001.png */; };
+		27D0AB9818D7F88C00B5FC70 /* voice003.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6818D7F88C00B5FC70 /* voice003.png */; };
+		27D0AB9918D7F88C00B5FC70 /* voice004.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6918D7F88C00B5FC70 /* voice004.png */; };
+		27D0AB9A18D7F88C00B5FC70 /* voice005.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6A18D7F88C00B5FC70 /* voice005.png */; };
+		27D0AB9B18D7F88C00B5FC70 /* voice006.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6B18D7F88C00B5FC70 /* voice006.png */; };
+		27D0AB9C18D7F88C00B5FC70 /* voice007.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6C18D7F88C00B5FC70 /* voice007.png */; };
+		27D0AB9D18D7F88C00B5FC70 /* voice008.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6D18D7F88C00B5FC70 /* voice008.png */; };
+		27D0AB9E18D7F88C00B5FC70 /* voice009.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6E18D7F88C00B5FC70 /* voice009.png */; };
+		27D0AB9F18D7F88C00B5FC70 /* voice010.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB6F18D7F88C00B5FC70 /* voice010.png */; };
+		27D0ABA018D7F88C00B5FC70 /* voice011.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7018D7F88C00B5FC70 /* voice011.png */; };
+		27D0ABA118D7F88C00B5FC70 /* voice_wait001.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7118D7F88C00B5FC70 /* voice_wait001.png */; };
+		27D0ABA218D7F88C00B5FC70 /* voice_wait002.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7218D7F88C00B5FC70 /* voice_wait002.png */; };
+		27D0ABA318D7F88C00B5FC70 /* voice_wait003.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7318D7F88C00B5FC70 /* voice_wait003.png */; };
+		27D0ABA418D7F88C00B5FC70 /* voice_wait004.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7418D7F88C00B5FC70 /* voice_wait004.png */; };
+		27D0ABA518D7F88C00B5FC70 /* voice_wait005.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7518D7F88C00B5FC70 /* voice_wait005.png */; };
+		27D0ABA618D7F88C00B5FC70 /* voice_wait006.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7618D7F88C00B5FC70 /* voice_wait006.png */; };
+		27D0ABA718D7F88C00B5FC70 /* voice_wait007.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7718D7F88C00B5FC70 /* voice_wait007.png */; };
+		27D0ABA818D7F88C00B5FC70 /* wrang.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7818D7F88C00B5FC70 /* wrang.png */; };
+		27D0ABA918D7F88C00B5FC70 /* yufabtn.png in Resources */ = {isa = PBXBuildFile; fileRef = 27D0AB7918D7F88C00B5FC70 /* yufabtn.png */; };
+		27D0ABB118D7F89700B5FC70 /* WXGrammarABNFViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABAC18D7F89700B5FC70 /* WXGrammarABNFViewController.m */; };
+		27D0ABB218D7F89700B5FC70 /* WXGrammarWordlistView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABAE18D7F89700B5FC70 /* WXGrammarWordlistView.m */; };
+		27D0ABB318D7F89700B5FC70 /* WXGrammarWordlistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABB018D7F89700B5FC70 /* WXGrammarWordlistViewController.m */; };
+		27D0ABB618D7F89F00B5FC70 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABB518D7F89F00B5FC70 /* RootViewController.m */; };
+		27D0ABC118D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABC018D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.m */; };
+		27D0ABCD18D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABC418D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.m */; };
+		27D0ABCE18D7F8BD00B5FC70 /* WXSpeechSynthesizerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABC618D7F8BD00B5FC70 /* WXSpeechSynthesizerView.m */; };
+		27D0ABCF18D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABC818D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.mm */; };
+		27D0ABD018D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABCA18D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.m */; };
+		27D0ABD118D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABCC18D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.m */; };
+		27D0ABD318D7F8E600B5FC70 /* WXResourceBundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 27D0ABD218D7F8E600B5FC70 /* WXResourceBundle.bundle */; };
+		27D0ABDA18D7FA3700B5FC70 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 27D0ABD918D7FA3700B5FC70 /* libz.dylib */; };
+		27D0ABE018D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.m in Sources */ = {isa = PBXBuildFile; fileRef = 27D0ABDF18D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		2746ACBF1A19D9A200CC374D /* libmtaWXOsdk.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libmtaWXOsdk.a; sourceTree = "<group>"; };
+		275D8B5F19FA336C00646C5B /* libWXVoiceSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWXVoiceSDK.a; sourceTree = "<group>"; };
+		275D8B6119FA338900646C5B /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		276A05E618E959C6002778B0 /* RootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RootNavigationController.h; path = ../RootNavigationController.h; sourceTree = "<group>"; };
+		276A05E718E959C6002778B0 /* RootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RootNavigationController.m; path = ../RootNavigationController.m; sourceTree = "<group>"; };
+		278D027818D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WXVoiceSDKWithUIDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		278D027B18D7F76C00E8CC31 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		278D027D18D7F76C00E8CC31 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		278D027F18D7F76C00E8CC31 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		278D028318D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WXVoiceSDKWithUIDemo-Info.plist"; sourceTree = "<group>"; };
+		278D028518D7F76C00E8CC31 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		278D028718D7F76C00E8CC31 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		278D028918D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "WXVoiceSDKWithUIDemo-Prefix.pch"; sourceTree = "<group>"; };
+		278D028A18D7F76C00E8CC31 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		278D028B18D7F76C00E8CC31 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		27D0AB3718D7F7F000B5FC70 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		27D0AB3918D7F7F700B5FC70 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		27D0AB3B18D7F7FE00B5FC70 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		27D0AB3D18D7F80600B5FC70 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		27D0AB4018D7F87F00B5FC70 /* UIColor+WXVoiceColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+WXVoiceColor.h"; sourceTree = "<group>"; };
+		27D0AB4118D7F87F00B5FC70 /* UIColor+WXVoiceColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+WXVoiceColor.m"; sourceTree = "<group>"; };
+		27D0AB4218D7F87F00B5FC70 /* WXErrorMsg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXErrorMsg.h; sourceTree = "<group>"; };
+		27D0AB4318D7F87F00B5FC70 /* WXErrorMsg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXErrorMsg.m; sourceTree = "<group>"; };
+		27D0AB4418D7F87F00B5FC70 /* WXMsgView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXMsgView.h; sourceTree = "<group>"; };
+		27D0AB4518D7F87F00B5FC70 /* WXMsgView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXMsgView.m; sourceTree = "<group>"; };
+		27D0AB4A18D7F88B00B5FC70 /* bg_156.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_156.png; sourceTree = "<group>"; };
+		27D0AB4B18D7F88B00B5FC70 /* bg_320x568.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_320x568.png; sourceTree = "<group>"; };
+		27D0AB4C18D7F88B00B5FC70 /* btn01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn01.png; sourceTree = "<group>"; };
+		27D0AB4D18D7F88B00B5FC70 /* btn02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn02.png; sourceTree = "<group>"; };
+		27D0AB4E18D7F88B00B5FC70 /* btn03.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn03.png; sourceTree = "<group>"; };
+		27D0AB4F18D7F88B00B5FC70 /* btn04.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn04.png; sourceTree = "<group>"; };
+		27D0AB5018D7F88B00B5FC70 /* cibiaobtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cibiaobtn.png; sourceTree = "<group>"; };
+		27D0AB5118D7F88B00B5FC70 /* close.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = close.png; sourceTree = "<group>"; };
+		27D0AB5218D7F88B00B5FC70 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		27D0AB5318D7F88B00B5FC70 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		27D0AB5418D7F88B00B5FC70 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		27D0AB5518D7F88B00B5FC70 /* error.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = error.png; sourceTree = "<group>"; };
+		27D0AB5618D7F88B00B5FC70 /* head.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = head.png; sourceTree = "<group>"; };
+		27D0AB5718D7F88B00B5FC70 /* hechengbtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hechengbtn.png; sourceTree = "<group>"; };
+		27D0AB5818D7F88B00B5FC70 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
+		27D0AB5918D7F88C00B5FC70 /* lb_btn1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lb_btn1.png; sourceTree = "<group>"; };
+		27D0AB5A18D7F88C00B5FC70 /* lb_btn2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lb_btn2.png; sourceTree = "<group>"; };
+		27D0AB5B18D7F88C00B5FC70 /* lb_btn3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lb_btn3.png; sourceTree = "<group>"; };
+		27D0AB5C18D7F88C00B5FC70 /* lb_btn4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lb_btn4.png; sourceTree = "<group>"; };
+		27D0AB5D18D7F88C00B5FC70 /* lb_btn5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lb_btn5.png; sourceTree = "<group>"; };
+		27D0AB5E18D7F88C00B5FC70 /* ok.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ok.png; sourceTree = "<group>"; };
+		27D0AB5F18D7F88C00B5FC70 /* open.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = open.png; sourceTree = "<group>"; };
+		27D0AB6018D7F88C00B5FC70 /* pause001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause001.png; sourceTree = "<group>"; };
+		27D0AB6118D7F88C00B5FC70 /* pause002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause002.png; sourceTree = "<group>"; };
+		27D0AB6218D7F88C00B5FC70 /* play001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play001.png; sourceTree = "<group>"; };
+		27D0AB6318D7F88C00B5FC70 /* play002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play002.png; sourceTree = "<group>"; };
+		27D0AB6418D7F88C00B5FC70 /* reset001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset001.png; sourceTree = "<group>"; };
+		27D0AB6518D7F88C00B5FC70 /* reset002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reset002.png; sourceTree = "<group>"; };
+		27D0AB6618D7F88C00B5FC70 /* shibiebtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shibiebtn.png; sourceTree = "<group>"; };
+		27D0AB6718D7F88C00B5FC70 /* voice001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice001.png; sourceTree = "<group>"; };
+		27D0AB6818D7F88C00B5FC70 /* voice003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice003.png; sourceTree = "<group>"; };
+		27D0AB6918D7F88C00B5FC70 /* voice004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice004.png; sourceTree = "<group>"; };
+		27D0AB6A18D7F88C00B5FC70 /* voice005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice005.png; sourceTree = "<group>"; };
+		27D0AB6B18D7F88C00B5FC70 /* voice006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice006.png; sourceTree = "<group>"; };
+		27D0AB6C18D7F88C00B5FC70 /* voice007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice007.png; sourceTree = "<group>"; };
+		27D0AB6D18D7F88C00B5FC70 /* voice008.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice008.png; sourceTree = "<group>"; };
+		27D0AB6E18D7F88C00B5FC70 /* voice009.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice009.png; sourceTree = "<group>"; };
+		27D0AB6F18D7F88C00B5FC70 /* voice010.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice010.png; sourceTree = "<group>"; };
+		27D0AB7018D7F88C00B5FC70 /* voice011.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice011.png; sourceTree = "<group>"; };
+		27D0AB7118D7F88C00B5FC70 /* voice_wait001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait001.png; sourceTree = "<group>"; };
+		27D0AB7218D7F88C00B5FC70 /* voice_wait002.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait002.png; sourceTree = "<group>"; };
+		27D0AB7318D7F88C00B5FC70 /* voice_wait003.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait003.png; sourceTree = "<group>"; };
+		27D0AB7418D7F88C00B5FC70 /* voice_wait004.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait004.png; sourceTree = "<group>"; };
+		27D0AB7518D7F88C00B5FC70 /* voice_wait005.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait005.png; sourceTree = "<group>"; };
+		27D0AB7618D7F88C00B5FC70 /* voice_wait006.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait006.png; sourceTree = "<group>"; };
+		27D0AB7718D7F88C00B5FC70 /* voice_wait007.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voice_wait007.png; sourceTree = "<group>"; };
+		27D0AB7818D7F88C00B5FC70 /* wrang.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wrang.png; sourceTree = "<group>"; };
+		27D0AB7918D7F88C00B5FC70 /* yufabtn.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = yufabtn.png; sourceTree = "<group>"; };
+		27D0ABAB18D7F89700B5FC70 /* WXGrammarABNFViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXGrammarABNFViewController.h; sourceTree = "<group>"; };
+		27D0ABAC18D7F89700B5FC70 /* WXGrammarABNFViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXGrammarABNFViewController.m; sourceTree = "<group>"; };
+		27D0ABAD18D7F89700B5FC70 /* WXGrammarWordlistView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXGrammarWordlistView.h; sourceTree = "<group>"; };
+		27D0ABAE18D7F89700B5FC70 /* WXGrammarWordlistView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXGrammarWordlistView.m; sourceTree = "<group>"; };
+		27D0ABAF18D7F89700B5FC70 /* WXGrammarWordlistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXGrammarWordlistViewController.h; sourceTree = "<group>"; };
+		27D0ABB018D7F89700B5FC70 /* WXGrammarWordlistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXGrammarWordlistViewController.m; sourceTree = "<group>"; };
+		27D0ABB418D7F89F00B5FC70 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		27D0ABB518D7F89F00B5FC70 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		27D0ABBF18D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechRecognizerWithUIViewController.h; sourceTree = "<group>"; };
+		27D0ABC018D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechRecognizerWithUIViewController.m; sourceTree = "<group>"; };
+		27D0ABC318D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerPlayer.h; sourceTree = "<group>"; };
+		27D0ABC418D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechSynthesizerPlayer.m; sourceTree = "<group>"; };
+		27D0ABC518D7F8BD00B5FC70 /* WXSpeechSynthesizerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerView.h; sourceTree = "<group>"; };
+		27D0ABC618D7F8BD00B5FC70 /* WXSpeechSynthesizerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechSynthesizerView.m; sourceTree = "<group>"; };
+		27D0ABC718D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerViewController.h; sourceTree = "<group>"; };
+		27D0ABC818D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WXSpeechSynthesizerViewController.mm; sourceTree = "<group>"; };
+		27D0ABC918D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerViewControllerForLongText.h; sourceTree = "<group>"; };
+		27D0ABCA18D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechSynthesizerViewControllerForLongText.m; sourceTree = "<group>"; };
+		27D0ABCB18D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizerWithPlayerForLongText.h; sourceTree = "<group>"; };
+		27D0ABCC18D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechSynthesizerWithPlayerForLongText.m; sourceTree = "<group>"; };
+		27D0ABD218D7F8E600B5FC70 /* WXResourceBundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WXResourceBundle.bundle; sourceTree = "<group>"; };
+		27D0ABD618D7F90300B5FC70 /* WXSpeechRecognizerWithUI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXSpeechRecognizerWithUI.h; sourceTree = "<group>"; };
+		27D0ABD718D7F90300B5FC70 /* WXSpeechSynthesizer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXSpeechSynthesizer.h; sourceTree = "<group>"; };
+		27D0ABD818D7F90300B5FC70 /* WXVoiceSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WXVoiceSDK.h; sourceTree = "<group>"; };
+		27D0ABD918D7FA3700B5FC70 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		27D0ABDE18D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXSpeechRecognizerWithUIView.h; sourceTree = "<group>"; };
+		27D0ABDF18D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WXSpeechRecognizerWithUIView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		278D027518D7F76C00E8CC31 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				275D8B6219FA338900646C5B /* libsqlite3.dylib in Frameworks */,
+				27D0ABDA18D7FA3700B5FC70 /* libz.dylib in Frameworks */,
+				27D0AB3E18D7F80600B5FC70 /* AVFoundation.framework in Frameworks */,
+				27D0AB3C18D7F7FE00B5FC70 /* AudioToolbox.framework in Frameworks */,
+				2746ACC01A19D9A200CC374D /* libmtaWXOsdk.a in Frameworks */,
+				27D0AB3A18D7F7F700B5FC70 /* CoreTelephony.framework in Frameworks */,
+				27D0AB3818D7F7F000B5FC70 /* SystemConfiguration.framework in Frameworks */,
+				278D027C18D7F76C00E8CC31 /* UIKit.framework in Frameworks */,
+				278D027E18D7F76C00E8CC31 /* Foundation.framework in Frameworks */,
+				275D8B6019FA336C00646C5B /* libWXVoiceSDK.a in Frameworks */,
+				278D028018D7F76C00E8CC31 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		278D026F18D7F76C00E8CC31 = {
+			isa = PBXGroup;
+			children = (
+				278D028118D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo */,
+				278D027A18D7F76C00E8CC31 /* Frameworks */,
+				278D027918D7F76C00E8CC31 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		278D027918D7F76C00E8CC31 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				278D027818D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		278D027A18D7F76C00E8CC31 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				275D8B6119FA338900646C5B /* libsqlite3.dylib */,
+				27D0ABD918D7FA3700B5FC70 /* libz.dylib */,
+				27D0ABD618D7F90300B5FC70 /* WXSpeechRecognizerWithUI.h */,
+				27D0ABD718D7F90300B5FC70 /* WXSpeechSynthesizer.h */,
+				27D0ABD818D7F90300B5FC70 /* WXVoiceSDK.h */,
+				275D8B5F19FA336C00646C5B /* libWXVoiceSDK.a */,
+				2746ACBF1A19D9A200CC374D /* libmtaWXOsdk.a */,
+				27D0ABD218D7F8E600B5FC70 /* WXResourceBundle.bundle */,
+				27D0AB3D18D7F80600B5FC70 /* AVFoundation.framework */,
+				27D0AB3B18D7F7FE00B5FC70 /* AudioToolbox.framework */,
+				27D0AB3918D7F7F700B5FC70 /* CoreTelephony.framework */,
+				27D0AB3718D7F7F000B5FC70 /* SystemConfiguration.framework */,
+				278D027B18D7F76C00E8CC31 /* UIKit.framework */,
+				278D027D18D7F76C00E8CC31 /* Foundation.framework */,
+				278D027F18D7F76C00E8CC31 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		278D028118D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo */ = {
+			isa = PBXGroup;
+			children = (
+				278D028A18D7F76C00E8CC31 /* AppDelegate.h */,
+				278D028B18D7F76C00E8CC31 /* AppDelegate.m */,
+				27D0ABB418D7F89F00B5FC70 /* RootViewController.h */,
+				27D0ABB518D7F89F00B5FC70 /* RootViewController.m */,
+				27D0ABBE18D7F8AD00B5FC70 /* WXSpeechRecognizerWithUI */,
+				27D0ABC218D7F8BD00B5FC70 /* WXSpeechSynthesizer */,
+				27D0ABAA18D7F89700B5FC70 /* WXGrammar */,
+				27D0AB4918D7F88B00B5FC70 /* IOSImage */,
+				27D0AB3F18D7F87F00B5FC70 /* Base */,
+				278D028218D7F76C00E8CC31 /* Supporting Files */,
+			);
+			path = WXVoiceSDKWithUIDemo;
+			sourceTree = "<group>";
+		};
+		278D028218D7F76C00E8CC31 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				278D028318D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo-Info.plist */,
+				278D028418D7F76C00E8CC31 /* InfoPlist.strings */,
+				278D028718D7F76C00E8CC31 /* main.m */,
+				278D028918D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		27D0AB3F18D7F87F00B5FC70 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				276A05E618E959C6002778B0 /* RootNavigationController.h */,
+				276A05E718E959C6002778B0 /* RootNavigationController.m */,
+				27D0AB4018D7F87F00B5FC70 /* UIColor+WXVoiceColor.h */,
+				27D0AB4118D7F87F00B5FC70 /* UIColor+WXVoiceColor.m */,
+				27D0AB4218D7F87F00B5FC70 /* WXErrorMsg.h */,
+				27D0AB4318D7F87F00B5FC70 /* WXErrorMsg.m */,
+				27D0AB4418D7F87F00B5FC70 /* WXMsgView.h */,
+				27D0AB4518D7F87F00B5FC70 /* WXMsgView.m */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		27D0AB4918D7F88B00B5FC70 /* IOSImage */ = {
+			isa = PBXGroup;
+			children = (
+				27D0AB4A18D7F88B00B5FC70 /* bg_156.png */,
+				27D0AB4B18D7F88B00B5FC70 /* bg_320x568.png */,
+				27D0AB4C18D7F88B00B5FC70 /* btn01.png */,
+				27D0AB4D18D7F88B00B5FC70 /* btn02.png */,
+				27D0AB4E18D7F88B00B5FC70 /* btn03.png */,
+				27D0AB4F18D7F88B00B5FC70 /* btn04.png */,
+				27D0AB5018D7F88B00B5FC70 /* cibiaobtn.png */,
+				27D0AB5118D7F88B00B5FC70 /* close.png */,
+				27D0AB5218D7F88B00B5FC70 /* Default-568h@2x.png */,
+				27D0AB5318D7F88B00B5FC70 /* Default.png */,
+				27D0AB5418D7F88B00B5FC70 /* Default@2x.png */,
+				27D0AB5518D7F88B00B5FC70 /* error.png */,
+				27D0AB5618D7F88B00B5FC70 /* head.png */,
+				27D0AB5718D7F88B00B5FC70 /* hechengbtn.png */,
+				27D0AB5818D7F88B00B5FC70 /* icon.png */,
+				27D0AB5918D7F88C00B5FC70 /* lb_btn1.png */,
+				27D0AB5A18D7F88C00B5FC70 /* lb_btn2.png */,
+				27D0AB5B18D7F88C00B5FC70 /* lb_btn3.png */,
+				27D0AB5C18D7F88C00B5FC70 /* lb_btn4.png */,
+				27D0AB5D18D7F88C00B5FC70 /* lb_btn5.png */,
+				27D0AB5E18D7F88C00B5FC70 /* ok.png */,
+				27D0AB5F18D7F88C00B5FC70 /* open.png */,
+				27D0AB6018D7F88C00B5FC70 /* pause001.png */,
+				27D0AB6118D7F88C00B5FC70 /* pause002.png */,
+				27D0AB6218D7F88C00B5FC70 /* play001.png */,
+				27D0AB6318D7F88C00B5FC70 /* play002.png */,
+				27D0AB6418D7F88C00B5FC70 /* reset001.png */,
+				27D0AB6518D7F88C00B5FC70 /* reset002.png */,
+				27D0AB6618D7F88C00B5FC70 /* shibiebtn.png */,
+				27D0AB6718D7F88C00B5FC70 /* voice001.png */,
+				27D0AB6818D7F88C00B5FC70 /* voice003.png */,
+				27D0AB6918D7F88C00B5FC70 /* voice004.png */,
+				27D0AB6A18D7F88C00B5FC70 /* voice005.png */,
+				27D0AB6B18D7F88C00B5FC70 /* voice006.png */,
+				27D0AB6C18D7F88C00B5FC70 /* voice007.png */,
+				27D0AB6D18D7F88C00B5FC70 /* voice008.png */,
+				27D0AB6E18D7F88C00B5FC70 /* voice009.png */,
+				27D0AB6F18D7F88C00B5FC70 /* voice010.png */,
+				27D0AB7018D7F88C00B5FC70 /* voice011.png */,
+				27D0AB7118D7F88C00B5FC70 /* voice_wait001.png */,
+				27D0AB7218D7F88C00B5FC70 /* voice_wait002.png */,
+				27D0AB7318D7F88C00B5FC70 /* voice_wait003.png */,
+				27D0AB7418D7F88C00B5FC70 /* voice_wait004.png */,
+				27D0AB7518D7F88C00B5FC70 /* voice_wait005.png */,
+				27D0AB7618D7F88C00B5FC70 /* voice_wait006.png */,
+				27D0AB7718D7F88C00B5FC70 /* voice_wait007.png */,
+				27D0AB7818D7F88C00B5FC70 /* wrang.png */,
+				27D0AB7918D7F88C00B5FC70 /* yufabtn.png */,
+			);
+			path = IOSImage;
+			sourceTree = "<group>";
+		};
+		27D0ABAA18D7F89700B5FC70 /* WXGrammar */ = {
+			isa = PBXGroup;
+			children = (
+				27D0ABAB18D7F89700B5FC70 /* WXGrammarABNFViewController.h */,
+				27D0ABAC18D7F89700B5FC70 /* WXGrammarABNFViewController.m */,
+				27D0ABAD18D7F89700B5FC70 /* WXGrammarWordlistView.h */,
+				27D0ABAE18D7F89700B5FC70 /* WXGrammarWordlistView.m */,
+				27D0ABAF18D7F89700B5FC70 /* WXGrammarWordlistViewController.h */,
+				27D0ABB018D7F89700B5FC70 /* WXGrammarWordlistViewController.m */,
+			);
+			path = WXGrammar;
+			sourceTree = "<group>";
+		};
+		27D0ABBE18D7F8AD00B5FC70 /* WXSpeechRecognizerWithUI */ = {
+			isa = PBXGroup;
+			children = (
+				27D0ABBF18D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.h */,
+				27D0ABC018D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.m */,
+				27D0ABDE18D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.h */,
+				27D0ABDF18D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.m */,
+			);
+			path = WXSpeechRecognizerWithUI;
+			sourceTree = "<group>";
+		};
+		27D0ABC218D7F8BD00B5FC70 /* WXSpeechSynthesizer */ = {
+			isa = PBXGroup;
+			children = (
+				27D0ABC318D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.h */,
+				27D0ABC418D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.m */,
+				27D0ABC518D7F8BD00B5FC70 /* WXSpeechSynthesizerView.h */,
+				27D0ABC618D7F8BD00B5FC70 /* WXSpeechSynthesizerView.m */,
+				27D0ABC718D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.h */,
+				27D0ABC818D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.mm */,
+				27D0ABC918D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.h */,
+				27D0ABCA18D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.m */,
+				27D0ABCB18D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.h */,
+				27D0ABCC18D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.m */,
+			);
+			path = WXSpeechSynthesizer;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		278D027718D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 278D029518D7F76C00E8CC31 /* Build configuration list for PBXNativeTarget "WXVoiceSDKWithUIDemo" */;
+			buildPhases = (
+				278D027418D7F76C00E8CC31 /* Sources */,
+				278D027518D7F76C00E8CC31 /* Frameworks */,
+				278D027618D7F76C00E8CC31 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WXVoiceSDKWithUIDemo;
+			productName = WXVoiceSDKWithUIDemo;
+			productReference = 278D027818D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		278D027018D7F76C00E8CC31 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = "Tencent Research";
+			};
+			buildConfigurationList = 278D027318D7F76C00E8CC31 /* Build configuration list for PBXProject "WXVoiceSDKWithUIDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 278D026F18D7F76C00E8CC31;
+			productRefGroup = 278D027918D7F76C00E8CC31 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				278D027718D7F76C00E8CC31 /* WXVoiceSDKWithUIDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		278D027618D7F76C00E8CC31 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				278D028618D7F76C00E8CC31 /* InfoPlist.strings in Resources */,
+				27D0AB9918D7F88C00B5FC70 /* voice004.png in Resources */,
+				27D0ABA918D7F88C00B5FC70 /* yufabtn.png in Resources */,
+				27D0ABA518D7F88C00B5FC70 /* voice_wait005.png in Resources */,
+				27D0AB7E18D7F88C00B5FC70 /* btn03.png in Resources */,
+				27D0AB9F18D7F88C00B5FC70 /* voice010.png in Resources */,
+				27D0AB8F18D7F88C00B5FC70 /* open.png in Resources */,
+				27D0AB9D18D7F88C00B5FC70 /* voice008.png in Resources */,
+				27D0ABA318D7F88C00B5FC70 /* voice_wait003.png in Resources */,
+				27D0AB8C18D7F88C00B5FC70 /* lb_btn4.png in Resources */,
+				27D0AB9818D7F88C00B5FC70 /* voice003.png in Resources */,
+				27D0AB9E18D7F88C00B5FC70 /* voice009.png in Resources */,
+				27D0AB7D18D7F88C00B5FC70 /* btn02.png in Resources */,
+				27D0ABA718D7F88C00B5FC70 /* voice_wait007.png in Resources */,
+				27D0ABA018D7F88C00B5FC70 /* voice011.png in Resources */,
+				27D0AB8B18D7F88C00B5FC70 /* lb_btn3.png in Resources */,
+				27D0AB8918D7F88C00B5FC70 /* lb_btn1.png in Resources */,
+				27D0AB9318D7F88C00B5FC70 /* play002.png in Resources */,
+				27D0AB7F18D7F88C00B5FC70 /* btn04.png in Resources */,
+				27D0AB7A18D7F88C00B5FC70 /* bg_156.png in Resources */,
+				27D0AB8518D7F88C00B5FC70 /* error.png in Resources */,
+				27D0ABA618D7F88C00B5FC70 /* voice_wait006.png in Resources */,
+				27D0ABA818D7F88C00B5FC70 /* wrang.png in Resources */,
+				27D0ABA218D7F88C00B5FC70 /* voice_wait002.png in Resources */,
+				27D0AB8A18D7F88C00B5FC70 /* lb_btn2.png in Resources */,
+				27D0AB8118D7F88C00B5FC70 /* close.png in Resources */,
+				27D0AB9718D7F88C00B5FC70 /* voice001.png in Resources */,
+				27D0AB9018D7F88C00B5FC70 /* pause001.png in Resources */,
+				27D0ABA418D7F88C00B5FC70 /* voice_wait004.png in Resources */,
+				27D0AB9418D7F88C00B5FC70 /* reset001.png in Resources */,
+				27D0AB9118D7F88C00B5FC70 /* pause002.png in Resources */,
+				27D0AB8018D7F88C00B5FC70 /* cibiaobtn.png in Resources */,
+				27D0AB8218D7F88C00B5FC70 /* Default-568h@2x.png in Resources */,
+				27D0AB9518D7F88C00B5FC70 /* reset002.png in Resources */,
+				27D0AB8618D7F88C00B5FC70 /* head.png in Resources */,
+				27D0AB8818D7F88C00B5FC70 /* icon.png in Resources */,
+				27D0AB7C18D7F88C00B5FC70 /* btn01.png in Resources */,
+				27D0AB9218D7F88C00B5FC70 /* play001.png in Resources */,
+				27D0AB9A18D7F88C00B5FC70 /* voice005.png in Resources */,
+				27D0AB8718D7F88C00B5FC70 /* hechengbtn.png in Resources */,
+				27D0AB8318D7F88C00B5FC70 /* Default.png in Resources */,
+				27D0ABA118D7F88C00B5FC70 /* voice_wait001.png in Resources */,
+				27D0AB9C18D7F88C00B5FC70 /* voice007.png in Resources */,
+				27D0AB8E18D7F88C00B5FC70 /* ok.png in Resources */,
+				27D0AB8D18D7F88C00B5FC70 /* lb_btn5.png in Resources */,
+				27D0AB9B18D7F88C00B5FC70 /* voice006.png in Resources */,
+				27D0AB8418D7F88C00B5FC70 /* Default@2x.png in Resources */,
+				27D0ABD318D7F8E600B5FC70 /* WXResourceBundle.bundle in Resources */,
+				27D0AB9618D7F88C00B5FC70 /* shibiebtn.png in Resources */,
+				27D0AB7B18D7F88C00B5FC70 /* bg_320x568.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		278D027418D7F76C00E8CC31 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				27D0ABB118D7F89700B5FC70 /* WXGrammarABNFViewController.m in Sources */,
+				27D0AB4618D7F87F00B5FC70 /* UIColor+WXVoiceColor.m in Sources */,
+				276A05E818E959C6002778B0 /* RootNavigationController.m in Sources */,
+				27D0ABB218D7F89700B5FC70 /* WXGrammarWordlistView.m in Sources */,
+				27D0ABD018D7F8BD00B5FC70 /* WXSpeechSynthesizerViewControllerForLongText.m in Sources */,
+				27D0ABB318D7F89700B5FC70 /* WXGrammarWordlistViewController.m in Sources */,
+				27D0ABCD18D7F8BD00B5FC70 /* WXSpeechSynthesizerPlayer.m in Sources */,
+				27D0AB4818D7F87F00B5FC70 /* WXMsgView.m in Sources */,
+				27D0ABCE18D7F8BD00B5FC70 /* WXSpeechSynthesizerView.m in Sources */,
+				27D0ABD118D7F8BD00B5FC70 /* WXSpeechSynthesizerWithPlayerForLongText.m in Sources */,
+				27D0ABB618D7F89F00B5FC70 /* RootViewController.m in Sources */,
+				27D0ABC118D7F8AD00B5FC70 /* WXSpeechRecognizerWithUIViewController.m in Sources */,
+				278D028818D7F76C00E8CC31 /* main.m in Sources */,
+				27D0ABCF18D7F8BD00B5FC70 /* WXSpeechSynthesizerViewController.mm in Sources */,
+				278D028C18D7F76C00E8CC31 /* AppDelegate.m in Sources */,
+				27D0AB4718D7F87F00B5FC70 /* WXErrorMsg.m in Sources */,
+				27D0ABE018D7FBB600B5FC70 /* WXSpeechRecognizerWithUIView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		278D028418D7F76C00E8CC31 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				278D028518D7F76C00E8CC31 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		278D029318D7F76C00E8CC31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		278D029418D7F76C00E8CC31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		278D029618D7F76C00E8CC31 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WXVoiceSDKWithUIDemo/WXVoiceSDKWithUIDemo-Prefix.pch";
+				INFOPLIST_FILE = "WXVoiceSDKWithUIDemo/WXVoiceSDKWithUIDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		278D029718D7F76C00E8CC31 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LIBRARY = "libstdc++";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "WXVoiceSDKWithUIDemo/WXVoiceSDKWithUIDemo-Prefix.pch";
+				INFOPLIST_FILE = "WXVoiceSDKWithUIDemo/WXVoiceSDKWithUIDemo-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		278D027318D7F76C00E8CC31 /* Build configuration list for PBXProject "WXVoiceSDKWithUIDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				278D029318D7F76C00E8CC31 /* Debug */,
+				278D029418D7F76C00E8CC31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		278D029518D7F76C00E8CC31 /* Build configuration list for PBXNativeTarget "WXVoiceSDKWithUIDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				278D029618D7F76C00E8CC31 /* Debug */,
+				278D029718D7F76C00E8CC31 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 278D027018D7F76C00E8CC31 /* Project object */;
+}

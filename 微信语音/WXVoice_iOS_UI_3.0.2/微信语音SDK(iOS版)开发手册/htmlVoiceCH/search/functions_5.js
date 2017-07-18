@@ -1,0 +1,19 @@
+var searchData=
+[
+  ['setappid_3a',['setAppID:',['../interface_w_x_speech_synthesizer.html#aa991b71142243b1367827be24c9431cf',1,'WXSpeechSynthesizer::setAppID:()'],['../interface_w_x_voice_s_d_k.html#acf136615739869f57f6ed0299aed79c7',1,'WXVoiceSDK::setAppID:()']]],
+  ['setdomain_3a',['setDomain:',['../interface_w_x_speech_recognizer_with_u_i.html#a046f64320fd6d6b70d1d74e164b57a75',1,'WXSpeechRecognizerWithUI']]],
+  ['setresulttype_3a',['setResultType:',['../interface_w_x_speech_recognizer_with_u_i.html#a9ce6f38f1c66cfbd2e0f6b202fb690c1',1,'WXSpeechRecognizerWithUI::setResultType:()'],['../interface_w_x_voice_s_d_k.html#a64da26b4bf1a141ed557ec34fdfed697',1,'WXVoiceSDK::setResultType:()']]],
+  ['setsiltime_3a',['setSilTime:',['../interface_w_x_speech_recognizer_with_u_i.html#a3e146fef69389558a7a067604dd8114f',1,'WXSpeechRecognizerWithUI']]],
+  ['setspeechformat_3a',['setSpeechFormat:',['../interface_w_x_speech_synthesizer.html#aab8a13bf0a688f860e5658ea1af55309',1,'WXSpeechSynthesizer']]],
+  ['setvolumn_3a',['setVolumn:',['../interface_w_x_speech_synthesizer.html#ac7221257aaa6f28af48a7b4d891ce5bc',1,'WXSpeechSynthesizer']]],
+  ['sharedspeechsynthesizer',['sharedSpeechSynthesizer',['../interface_w_x_speech_synthesizer.html#a95015e0ddb9648ed56592ba21ca2aa62',1,'WXSpeechSynthesizer']]],
+  ['sharedwxvoice',['sharedWXVoice',['../interface_w_x_voice_s_d_k.html#a74994bbd2bc812635092d5767f834b76',1,'WXVoiceSDK']]],
+  ['showandstart',['showAndStart',['../interface_w_x_speech_recognizer_with_u_i.html#a3f2c4a13d7ee552f7a7a62ec9a4fbc7b',1,'WXSpeechRecognizerWithUI']]],
+  ['showandstartoncewithgrammarstring_3aandtype_3a',['showAndStartOnceWithGrammarString:andType:',['../interface_w_x_speech_recognizer_with_u_i.html#a079e533fc80aa2166778cb418829ae8a',1,'WXSpeechRecognizerWithUI']]],
+  ['speechsynthesizerdidcancel',['speechSynthesizerDidCancel',['../protocol_w_x_speech_synthesizer_delegate-p.html#a3e21f31f8b070334fcaf388d5b612385',1,'WXSpeechSynthesizerDelegate-p']]],
+  ['speechsynthesizermakeerror_3a',['speechSynthesizerMakeError:',['../protocol_w_x_speech_synthesizer_delegate-p.html#a7074376eea8dae6a895d3ea16967d0c8',1,'WXSpeechSynthesizerDelegate-p']]],
+  ['speechsynthesizerresultspeechdata_3aspeechformat_3a',['speechSynthesizerResultSpeechData:speechFormat:',['../protocol_w_x_speech_synthesizer_delegate-p.html#a356d4457510ff099f7738f717430230d',1,'WXSpeechSynthesizerDelegate-p']]],
+  ['startonce',['startOnce',['../interface_w_x_voice_s_d_k.html#ad8e8ced7d9a14c631a50df0147feb749',1,'WXVoiceSDK']]],
+  ['startoncewithgrammarstring_3aandtype_3a',['startOnceWithGrammarString:andType:',['../interface_w_x_voice_s_d_k.html#a3d74367a6e3960ce28dfbe3bcd657c0d',1,'WXVoiceSDK']]],
+  ['startwithtext_3a',['startWithText:',['../interface_w_x_speech_synthesizer.html#a4c19b43a9f03d62948a4a37d9722ecbe',1,'WXSpeechSynthesizer']]]
+];
