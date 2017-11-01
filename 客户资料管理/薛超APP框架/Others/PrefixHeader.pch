@@ -1,0 +1,23 @@
+//
+//  PrefixHeader.pch
+//  薛超APP框架
+//
+//  Created by 薛超 on 16/9/6.
+//  Copyright © 2016年 薛超. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+#import "Foundation.h"
+#import "BaseViewController.h"
+#import "NSString+expanded.h"
+#import "UIView+expanded.h"
+#import "UIView+AutoLayout.h"
+#import "AFNetworking.h"
+#import "MJRefresh.h"
+#import "UIImage+expanded.h"
+#import "SVProgressHUD.h"
+#import "Utility.h"
+#endif /* PrefixHeader_pch */

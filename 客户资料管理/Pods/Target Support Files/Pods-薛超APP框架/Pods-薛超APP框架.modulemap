@@ -1,0 +1,6 @@
+framework module Pods___APP__ {
+  umbrella header "Pods-薛超APP框架-umbrella.h"
+
+  export *
+  module * { export * }
+}

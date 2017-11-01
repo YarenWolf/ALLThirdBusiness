@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11542" systemVersion="15G1004" minimumToolsVersion="Xcode 7.3" sourceLanguage="Objective-C" userDefinedModelVersionIdentifier="">
+    <entity name="Acount" representedClassName="Acount" syncable="YES">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="arrears" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="edu" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="least" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="tips" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yinhang" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+    </entity>
+    <entity name="Coredata" representedClassName="Coredata" syncable="YES">
+        <attribute name="age" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="annualPremium" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="birthDay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="character" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="company" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dealTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="dream" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="economic" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstVision" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="hobby" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="homeAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="icon" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="insuranceType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="need" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="others" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="policyNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="position" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="quota" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="secondVision" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="suggest" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="unitAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="wechart" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Customdata" representedClassName="Customdata" syncable="YES">
+        <attribute name="bacceptM" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bbirthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bdayphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bIDnumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bnightphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="breceivebank" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bsex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="btelephone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="bworknumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cbnames" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="ccost" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="ccurrentmoney" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cedu" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="cendtime" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="cfapiaodata" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cfromtime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cjiaofeitype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="clastmoney" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cname" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="cnumber" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="cpaytime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cpaytype" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cstatus" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="ctoime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mbalance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mbaodan" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mcarddate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mcardnumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mdiedeal" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mfhandle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mfleave" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mhandle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mlastpay" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mmoneyhandle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mmoneyleave" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mnotselect" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="movermoney" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mpaymoney" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mreceiveman" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mstory" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mwanneng" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="myearhandle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="myearleave" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tacceptM" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="taddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tbaoe" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tbirthday" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tdayphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tid" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tIDnumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tname" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tnightphone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="towner" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tpaybank" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="treceivebank" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tsex" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ttelephone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tworknumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tZipcode" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Record" representedClassName="Record" syncable="YES">
+        <attribute name="account" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="classItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="descript" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="expectItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="inputItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="money" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="outputItem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yinhang" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Coredata" positionX="-63" positionY="-18" width="128" height="495"/>
+        <element name="Customdata" positionX="-36" positionY="162" width="128" height="960"/>
+        <element name="Record" positionX="-45" positionY="135" width="128" height="195"/>
+        <element name="Acount" positionX="-36" positionY="144" width="128" height="180"/>
+    </elements>
+</model>
